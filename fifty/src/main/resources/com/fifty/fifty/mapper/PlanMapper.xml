@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fifty.fifty.mapper.PlanMapper">
+
+<!-- 전체 조회 -->
+    <select id="list" resultType="Plan">
+      SELECT *
+      FROM plan
+    </select>
+
+<!-- 일정 조회 -->
+    <select id="selectByNo" resultType="Plan">
+      SELECT *
+      FROM plan
+      WHERE no = #{no}
+    </select>
+
+<!--  일정 등록 -->
+    <insert id="insert">
+      INSERT INTO plan (file_no, crt, title, content, start_at, end_at, created_at)
+      VALUES (#{fileNo}, #{crt}, #{title}, #{content}, #{startAt}, #{endAt}, now())
+    </insert>
+
+<!-- 일정 업데이트 -->
+    <update id="update">
+      UPDATE plan
+      SET file_no = #{fileNo},
+          title = #{title},
+          content = #{content},
+          crt = #{crt},
+          start_at = #{startAt},
+          end_at = #{endAt},
+          updated_at = now()
+      WHERE no = #{no}
+    </update>
+
+<!-- 일정 삭제 -->
+    <delete id="delete">
+      DELETE FROM plan
+      WHERE no = #{no}
+    </delete>
+
+</mapper>

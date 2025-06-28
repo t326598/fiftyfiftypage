@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fifty.fifty.mapper.YoutubeChartMapper">
+
+  <select id="getTodayChart" resultType="YoutubeChartData">
+    SELECT *
+    FROM fifty_fifty_music_char
+  </select>
+
+    <select id="findByVideoId" resultType="YoutubeChartData">
+        SELECT * FROM fifty_fifty_music_char WHERE video_id = #{videoId}
+    </select>
+
+    <insert id="insertChart">
+        INSERT INTO fifty_fifty_music_char
+        ( video_id, title, thumbnail_url, video_url, view_count, published_at)
+        VALUES
+        ( #{videoId}, #{title}, #{thumbnailUrl}, #{videoUrl}, #{viewCount}, #{publishedAt})
+    </insert>
+
+    <update id="updateChart">
+        UPDATE fifty_fifty_music_char
+        SET title = #{title},
+            thumbnail_url = #{thumbnailUrl},
+            video_url = #{videoUrl},
+            view_count = #{viewCount},
+            published_at = #{publishedAt}
+        WHERE no = #{no}
+    </update>
+
+  <delete id="deleteAllVideos">
+    DELETE FROM youtube_videos
+  </delete>
+
+  <insert id="insertVideos" parameterType="list">
+    INSERT INTO youtube_videos (video_id, title, channel_id, channel_title, publish_date, subscriber_count, view_count, thumbnail_url)
+    VALUES
+    <foreach collection="list" item="video" separator=",">
+      (#{video.videoId}, #{video.title}, #{video.channelId}, #{video.channelTitle}, #{video.publishDate}, #{video.subscriberCount}, #{video.viewCount}, #{video.thumbnailUrl})
+    </foreach>
+  </insert>
+
+  <select id="selectAll" resultType="YoutubeVideoList">
+    SELECT * FROM youtube_videos ORDER BY publish_date DESC LIMIT 50
+  </select>
+
+  <delete id="deleteAllFanVideos">
+    DELETE FROM fantube_videos
+  </delete>
+
+
+  <insert id="insertFanVideos" parameterType="list">
+    INSERT INTO fantube_videos (video_id, title, channel_id, channel_title, publish_date, subscriber_count, view_count, thumbnail_url)
+    VALUES
+    <foreach collection="list" item="video" separator=",">
+      (#{video.videoId}, #{video.title}, #{video.channelId}, #{video.channelTitle}, #{video.publishDate}, #{video.subscriberCount}, #{video.viewCount}, #{video.thumbnailUrl})
+    </foreach>
+  </insert>
+
+  <select id="selectAllFanVideo" resultType="YoutubeVideoList">
+    SELECT * FROM fantube_videos ORDER BY publish_date DESC LIMIT 50
+  </select>
+
+
+</mapper>

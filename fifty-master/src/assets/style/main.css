@@ -1,0 +1,11 @@
+/* 브라우저 기본 여백 제거 */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+.dark-calendar .fc {
+  background-color: #121212;
+  color: #ffffff;
+}
