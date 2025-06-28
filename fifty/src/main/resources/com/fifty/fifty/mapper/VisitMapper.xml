@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fifty.fifty.mapper.VisitMapper">
+
+
+    <insert id="insert">
+        INSERT INTO visit_count (visit_date, total_count, unique_count)
+        VALUES (CURDATE(), 1, 1)
+    </insert>
+
+    <update id="updateTotal">
+        UPDATE visit_count
+        SET total_count = total_count + 1
+        WHERE visit_date = CURDATE()
+    </update>
+
+    <update id="updateUnique">
+        UPDATE visit_count
+        SET unique_count = unique_count + 1
+        WHERE visit_date = CURDATE()
+    </update>
+
+    <select id="getTodayStats" resultType="VisitSummary">
+        SELECT visit_date, total_count, unique_count
+        FROM visit_count
+        WHERE visit_date = CURDATE()
+    </select>
+
+    <!-- 누적 방문자 통계 -->
+    <select id="getTotalStats" resultType="VisitSummary">
+        SELECT
+            SUM(total_count) AS totalCount,
+            SUM(unique_count) AS unique_count
+        FROM visit_count
+    </select>
+
+    <select id="getStatsByDate" resultType="VisitSummary">
+        SELECT *
+        FROM visit_count
+        WHERE visit_date BETWEEN #{startDate} AND #{endDate}
+        ORDER BY visit_date ASC
+    </select>
+
+
+</mapper>

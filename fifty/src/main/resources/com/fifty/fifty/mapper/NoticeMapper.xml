@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fifty.fifty.mapper.NoticeMapper">
+    <select id="list" resultType="Notice">
+        SELECT *
+        FROM Notice
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectByNo" resultType="Notice">
+        SELECT *
+        FROM Notice
+        WHERE no = #{no}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO Notice (file_no, title, content, created_at)
+        VALUES (#{fileNo}, #{title}, #{content}, now())
+    </insert>
+
+    <update id="update">
+        UPDATE Notice
+        SET file_no = #{fileNo},
+            title = #{title},
+            content = #{content},
+            updated_at = now()
+        WHERE no = #{no}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Notice
+        WHERE no = #{no}
+    </delete>
+
+       <select id="count" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM Notice
+    </select>
+
+
+</mapper>

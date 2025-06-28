@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FiftyApplication<fifty>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.fifty.fifty.FiftyApplication",
+            "projectName": "fifty",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fifty.fifty.mapper.MonthMapper">
+
+<select id="calendarList" resultType="Months">
+    SELECT m.*, f.name, f.path
+    FROM monthly_background m JOIN files f ON m.file_no = f.no
+</select>
+
+  <select id="getBackgroundByMonth" resultType="Months">
+   SELECT m.*, f.name
+    FROM monthly_background m JOIN files f ON m.file_no = f.no
+    WHERE month = #{month}
+  </select>
+
+  <update id="monthsUpdate">
+    UPDATE monthly_background
+    SET image_url = #{imageUrl}
+    WHERE id = #{id}
+  </update>
+</mapper>

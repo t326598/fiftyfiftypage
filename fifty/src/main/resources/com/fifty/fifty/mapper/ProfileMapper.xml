@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fifty.fifty.mapper.ProfileMapper">
+    <select id="list" resultType="Profile">
+        SELECT p.*, f.name, f.path
+        FROM Profile p JOIN  Files f ON p.file_no = f.no
+        WHERE f.crt = '7'
+    </select>
+
+
+<!-- 파일은 파일쪽에서 프로필 파일 패스만 바꿔주면 되는거아님? -->
+    <update id="update">
+        UPDATE Profile
+        SET content = #{content},
+            sub_content = #{subContent},
+            title = #{title}
+        WHERE no = #{no}
+    </update>
+    
+</mapper>
