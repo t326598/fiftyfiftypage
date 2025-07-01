@@ -4,6 +4,8 @@
 
 ![localhost_8081_ (1)](https://github.com/user-attachments/assets/14c9485e-d60f-48f0-bcea-bbdfc4fc0b9b)
 
+
+
 # 📚 **프로젝트 목차**
 
 ### 1. 프로젝트 소개
@@ -19,8 +21,9 @@
 - 2025-05-14 ~ 진행중
 ### :bulb: 기술 스택
 - Vue 3, TypeScript, Spring Boot, MyBatis, MySQL, Axios, FullCalendar.js, Chart.js 등
-### :bulb: 배포 환경(예정)
-- Front - Netlify, Back - Render, 스토리지 - AWS S3 , CDN - AWS CloudFront
+### :bulb: 배포 환경
+- Front - Netlify / Back - Render, Docker / 스토리지 - AWS S3 / CDN - AWS CloudFront / RDS - AWS RDS(MySQL)
+
 ### :bulb: 주요기능
 
 - **테마 전환**
@@ -116,6 +119,8 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 <p>협업툴 : GitHub, ERDCloud </p>
 
 
+<p>배포환경 : Netlify, Render, AWS S3, AWS CloudFront, AWS RDS, Docker </p>
+
 
 ### :bulb: ⚙ 프로젝트 설계 ERD
 ![bandicam 2025-06-25 14-43-47-074](https://github.com/user-attachments/assets/45dda539-4e7b-4e3c-a912-0a816c89c0b9)
@@ -136,6 +141,13 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
    방법4: 스케줄 기능 제거 : 에러발생
 
    방법4로 인해 스케줄로 인한 에러가 아니라고 판단 Devtools 제거 이후에는 서버 이상없이 동작 운영에는 큰 지장없는 에러 : 임시방편
+
+2. java.io.EOFException: null 에러발생
+   데이터를 읽어오는 과정에서 예상치못하게 파일 끝에 도달 했을때 발생하는 에러
+   Render같은 경우 60초 내에 서버를 실행해야하는데 서버 실행이 90초이상 걸려 발생하는 에러라 판단
+
+   방법1: AWS RDS서버는 서울이지만 Render 서버는 북미인걸 확인 북미 서버 > 싱가포르 서버로 변경 이후 93초 > 77초로 단축
+   방법2: 지연 초기화를 활성화 spring.main.lazy-initialization=true 를 사용하여 필요한 빈만 생성되도록 수정하자 빈 생성이 57초 > 23초로 단축 총 93초 > 43초로 단축해 이상없이 배포를 완료했습니다.
    
 
 ### :bulb: 학습포인트
@@ -146,10 +158,11 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 - DB 자동 정리 로직 설계 및 구현
 - Chart.js를 활용한 데이터 시각화 구현
 - YouTube api를 활용해 오픈 api 연동
+- Netlify, Render, AWS S3, AWS CloudFront, AWS RDS로 배포하고 Git Action 을 활용해 CI/CD 전반적인 관리 경험
 
 ### :bulb: ⚙ 프로젝트 보완 및 아쉬운점
 - Toast를 활용한 전역 에러 처리(진행중_)
 - WebSocket을 활용해 캘린더 일정이 다가올 경우 실시간으로 페이지 알람 요청 예정
 - Youtube 탑 10 영상 조회시 Redis 캐시를 활용한 속도 향상 작업 필요
 - **Papago API를 활용한 다국어 번역 기능 추가 예정**
-- Front Netlify, Back Render, 스토리지 AWS S3, CDN AWS CloudFront로 배포예정
+
