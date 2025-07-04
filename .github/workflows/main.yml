@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - name: Send HTTP request to Render service
-        run: curl -s https://fiftypage-vs2x.onrender.com/
+        run: curl -s https://fiftypage-vs2x.onrender.com/healthz
