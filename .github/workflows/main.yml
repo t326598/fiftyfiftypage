@@ -1,0 +1,14 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    - cron: '*/8 * * * *'  
+  workflow_dispatch:       
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send HTTP request to Render service
+        run: curl -s https://fiftypage-vs2x.onrender.com/
