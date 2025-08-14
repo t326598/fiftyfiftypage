@@ -11,7 +11,7 @@
 </select>
 
   <select id="getBackgroundByMonth" resultType="Months">
-   SELECT m.*, f.name
+   SELECT m.*, f.name, f.path
     FROM monthly_background m JOIN files f ON m.file_no = f.no
     WHERE month = #{month}
   </select>

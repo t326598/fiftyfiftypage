@@ -36,11 +36,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired 
-    private UserDetailServiceImpl userDetailServiceImpl;
-    
-    @Autowired 
-    private JwtProvider jwtProvider;
+    @Autowired private UserDetailServiceImpl userDetailServiceImpl;
+    @Autowired private JwtProvider jwtProvider;
 
     // ✅ AuthenticationManager 등록 방식 변경
     @Bean

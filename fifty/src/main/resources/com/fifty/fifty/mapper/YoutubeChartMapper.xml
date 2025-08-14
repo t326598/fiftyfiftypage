@@ -8,6 +8,7 @@
   <select id="getTodayChart" resultType="YoutubeChartData">
     SELECT *
     FROM fifty_fifty_music_char
+    ORDER BY view_count DESC
   </select>
 
     <select id="findByVideoId" resultType="YoutubeChartData">

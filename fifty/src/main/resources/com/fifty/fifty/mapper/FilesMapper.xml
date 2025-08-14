@@ -71,6 +71,23 @@
         </where>
     </select>
 
+   <select id="mainCount" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM files
+          <where>
+            1 = 1
+            AND crt NOT REGEXP '(^|,)6(,|$)'
+            AND crt NOT REGEXP '(^|,)7(,|$)'
+            AND crt NOT REGEXP '(^|,)8(,|$)'
+            <if test="crt != null and crt != ''">
+                AND crt REGEXP CONCAT('(^|,)', #{crt}, '(,|$)')
+            </if>
+            <if test="trueDay != null and trueDay != ''">
+                AND true_day = #{trueDay}
+            </if>
+        </where>
+    </select>
+
 
 
 </mapper>

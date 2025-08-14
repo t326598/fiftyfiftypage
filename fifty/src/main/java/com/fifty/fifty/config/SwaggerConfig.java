@@ -14,7 +14,7 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
-                .group("aloha") // 그룹명 설정
+                .group("DOHYUN") // 그룹명 설정
                 .pathsToMatch("/**") // 경로 설정
                 .build();
     }
@@ -22,8 +22,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("GYM Proejct API")
-                        .description("GYM 프로젝트 API 입니다.")
+                .info(new Info().title("FIFTY Proejct API")
+                        .description("FIFFTYPAGE 프로젝트 API 입니다.")
                         .version("v0.0.1"));
     }
 

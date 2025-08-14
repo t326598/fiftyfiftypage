@@ -26,13 +26,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         this.authenticationManager = authenticationManager;
         this.jwtProvider = jwtProvider;
     }
-
+    
+    /**
+     * 요청 필터 작업
+     * 1. JWT 추출
+     * 2. 인증 시도
+     * 3. JWT 검증
+     *      ⭕ 토큰이 유효하면, 인증 처리 완료
+     *      ❌ 토큰이 만료되면, (-)
+     * 4. 다음 필터로 진행
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
         // 1. JWT 추출
         String authorization = request.getHeader( SecurityConstants.TOKEN_HEADER ); // Authorization
+        log.info("authorization : " + authorization);
 
         // 💍 "Bearer {jwt}" 체크
         // 헤더가 없거나 올바르지 않으면 다음 필터로 진행
