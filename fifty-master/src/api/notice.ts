@@ -1,23 +1,28 @@
 import axios from "axios";
+const API_BASE_URL = process.env.VUE_APP_API_URL;
 
-const instance = axios.create({
-    baseURL: "http://localhost:8080/"
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 20000,
 })
+// const api = axios.create({
+//     baseURL: "http://localhost:8080/"
+// })
 
 function insertNotice(formData: any){
-    return instance.post("/notice", formData);
+    return api.post("/notice", formData);
 }
 
 function ListNotice() {
-  return instance.get("/notice");
+  return api.get("/notice");
 }
 
 function deleteNotice(no: number) {
-    return instance.delete(`/notice/${no}`);
+    return api.delete(`/notice/${no}`);
 }
 
 function updateNotice( data:any) {
-    return instance.put("/notice", data)
+    return api.put("/notice", data)
     
 }
 

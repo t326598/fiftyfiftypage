@@ -1,74 +1,119 @@
 <template>
   <div class="godDoUser">
-      <Header />
-      <div class="container">
-        <Sidebar/>
+    <Header />
+    <div class="container">
+      <Sidebar />
       <div class="main">
         <div class="inner">
           <div class="title">
             <h2>공지사항 목록</h2>
           </div>
           <div style="display: flex; justify-content: end; width: 1300px;">
-            <button @click="openInsertPopup" class="button"> 등록</button>
+            <button
+              class="button"
+              @click="openInsertModal"
+            >
+              등록
+            </button>
           </div>
-          <!-- 유저 목록 -->
           <div class="list">
             <table>
               <thead>
                 <tr>
-                  <th style="width: 5%">번호</th>
-                  <th style="width: 15%">제목</th>
-                  <th style="width: 55%">내용</th>
-                  <th style="width: 15%">등록일자</th>
-                  <th style="width: 5%"> </th>
-                  <th style="width: 5%"></th>
+                  <th style="width: 5%">
+                    번호
+                  </th>
+                  <th style="width: 15%">
+                    제목
+                  </th>
+                  <th style="width: 55%">
+                    내용
+                  </th>
+                  <th style="width: 15%">
+                    등록일자
+                  </th>
+                  <th style="width: 5%" />
+                  <th style="width: 5%" />
                 </tr>
               </thead>
               <tbody>
                 <tr v-if="userList.length === 0">
-                  <td colspan="8">조회된 데이터가 없습니다.</td>
+                  <td colspan="8">
+                    조회된 데이터가 없습니다.
+                  </td>
                 </tr>
-                <tr v-for="user in userList" :key="user.no">
+                <tr
+                  v-for="user in userList"
+                  :key="user.no"
+                >
                   <td>{{ user.no }}</td>
                   <td>{{ user.title }}</td>
                   <td>{{ user.content }}</td>
                   <td>{{ formatDate(user.createdAt) }}</td>
                   <td v-if="user.userAuth !== 'ROLE_ADMIN'">
-                      <button class="updateBtn" @click="openEditModal(user)">수정</button>
+                    <button
+                      class="updateBtn"
+                      @click="openEditModal(user)"
+                    >
+                      수정
+                    </button>
                   </td>
                   <td v-if="user.userAuth !== 'ROLE_ADMIN'">
-                       <button class="deleteBtn" @click="deleteNotice(user.no)">삭제</button>
+                    <button
+                      class="deleteBtn"
+                      @click="deleteNotice(user.no)"
+                    >
+                      삭제
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-  <div v-if="isModalOpen" class="modal-overlay">
-  <div class="modal">
-    <h3>공지사항 수정</h3>
-    <label>제목</label>
-    <input v-model="editData.title" type="text" />
-    <label>내용</label>
-    <textarea v-model="editData.content"></textarea>
-    <div class="modal-buttons">
-      <button @click="updateNotice">저장</button>
-      <button @click="closeModal">닫기</button>
+  <div
+    v-if="isModalOpen"
+    class="modal-overlay"
+  >
+    <div class="modal">
+      <h3>공지사항 수정</h3>
+      <label>제목</label>
+      <input
+        v-model="editData.title"
+        type="text"
+      >
+      <label>내용</label>
+      <textarea v-model="editData.content" />
+      <div class="modal-buttons">
+        <button @click="updateNotice">
+          저장
+        </button>
+        <button @click="closeModal">
+          닫기
+        </button>
+      </div>
     </div>
   </div>
-</div>
+
+  <NoticeInsertModal
+    v-if="isInsertModalOpen"
+    @close="closeInsertModal"
+    @noticeAdded="handleNoticeAdded"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import axios from '@/api/notice'
+import axios from '@/api/notice' // axios 인스턴스 경로 확인
 import Header from '@/components/admin/adminHeader.vue'
 import Sidebar from '@/components/admin/adminSidebar.vue'
-const isModalOpen = ref(false)
+import NoticeInsertModal from '@/components/admin/insertNotice.vue' // 새로 만든 모달 컴포넌트 임포트
+
+const isModalOpen = ref(false) // 기존 수정 모달 가시성
+const isInsertModalOpen = ref(false) // 새로운 등록 모달 가시성
 const editData = ref({ no: 0, title: '', content: '' })
 const userList = ref<any[]>([])
 
@@ -77,7 +122,7 @@ const openEditModal = (user: any) => {
   isModalOpen.value = true
 }
 
-// 모달 닫기
+// 수정 모달 닫기
 const closeModal = () => {
   isModalOpen.value = false
 }
@@ -86,7 +131,7 @@ const closeModal = () => {
 const updateNotice = async () => {
   try {
     await axios.updateNotice({
-      no:editData.value.no,
+      no: editData.value.no,
       title: editData.value.title,
       content: editData.value.content
     })
@@ -126,32 +171,23 @@ const formatDate = (dateStr: string) => {
   return new Date(dateStr).toLocaleString()
 }
 
-
 onMounted(() => {
   fetchNoticeList()
 })
 
-const openInsertPopup = () => {
-  const width = 600
-  const height = 400
-  const left = (window.screen.width + width) - 50
-  const top = (window.screen.height - height) / 2
-
-   const newWindow = window.open(
-    '/admin/notice', // 라우터 경로
-    '공지사항등록',
-    `width=${width},height=${height},left=${left},top=${top},resizable=no`
-  )
-
-  
-  const timer = setInterval(() => {
-    if (newWindow?.closed) {
-      clearInterval(timer)
-      fetchNoticeList() // 등록창 닫히면 리스트 갱신
-    }
-  }, 500)
-  
+// === 공지사항 등록 모달 관련 함수 ===
+const openInsertModal = () => {
+  isInsertModalOpen.value = true
 }
+
+const closeInsertModal = () => {
+  isInsertModalOpen.value = false
+}
+
+const handleNoticeAdded = () => {
+  fetchNoticeList() 
+}
+// ===================================
 </script>
 
 <style scoped>
@@ -166,6 +202,8 @@ const openInsertPopup = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* z-index는 InsertModal.vue의 z-index보다 낮거나 같아야 함 */
+  z-index: 1500; /* 이전에 2000을 줬다면 1500으로 */
 }
 
 .modal {
@@ -173,6 +211,9 @@ const openInsertPopup = () => {
   padding: 20px;
   border-radius: 8px;
   width: 500px;
+  /* 이 모달의 z-index는 overlay보다 높아야 하지만,
+     다른 모달과 겹치지 않도록 주의 */
+  z-index: 1501;
 }
 
 .modal input,
@@ -186,6 +227,7 @@ const openInsertPopup = () => {
   justify-content: space-between;
 }
 
+/* 이하 기존 스타일 유지 */
 .godDoUser .container {
   display: flex;
 }

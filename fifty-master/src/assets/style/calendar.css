@@ -1,0 +1,634 @@
+/* --- 공통 스타일 (FullCalendar와 Vue Cal 모두에 적용되거나, 레이아웃 관련) --- */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: black;
+  font-size: 2.5em;
+  font-weight: bold;
+  z-index: 2;
+  z-index: 2;
+  position: relative;
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  transition: transform 0.1s linear;
+  height: 100%;
+  max-height: 800px;
+  margin-top: 10px;
+  position: relative;
+  width: 100%;              
+  overflow-x: auto; 
+}
+
+.calendar-content {
+  padding: 50px;
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 700px;
+  overflow: hidden;
+  border-radius: 5%;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-background {
+  position: absolute;
+  filter: blur(2px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.calendar-main-area {
+  width: 100%;
+  height: 700px;
+   min-width: 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  position: relative;
+  /* z-index를 위해 */
+  z-index: 3;
+  /* 캘린더 위에 보이도록 */
+}
+
+.legend-item {
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (min-width: 921px) {
+  .calendar-main-area {
+    height: 700px;
+    /* 데스크톱 FullCalendar 높이 */
+  }
+
+  /* FullCalendar 기본 스타일 오버라이드 및 커스터마이징 */
+  .fc {
+    font-weight: bold;
+    color: black;
+  }
+
+  .fc .fc-toolbar-title {
+    color: black;
+  }
+
+  .fc .fc-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    /* 추가 */
+  }
+
+  .fc .fc-button:hover {
+    background-color: #0056b3;
+  }
+
+  .fc .fc-col-header-cell,
+  .fc .fc-daygrid-day-number,
+  .fc .fc-list-event-title,
+  .fc .fc-list-event-time {
+    color: black;
+  }
+
+  .fc-daygrid-day-frame {
+    border: 1px solid #ddd;
+    /* 셀 테두리 */
+  }
+
+  .fc-event {
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 10;
+  }
+
+  /* FullCalendar 이벤트 텍스트 색상 (배경색이 어두울 경우) */
+  .fc-event-main {
+    color: white;
+    /* 이벤트 내부 텍스트 색상 */
+  }
+}
+
+@media (max-width: 920px) {
+  .calendar-main-area {
+    height: 550px;
+  }
+
+  .vuecal {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .vuecal__menu,
+  .vuecal__title-bar,
+  .vuecal__weekdays-headers,
+  .vuecal__body {
+    background-color: transparent;
+    color: black;
+  }
+
+  .vuecal__cell {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .vuecal__cell--selected {
+    background-color: #cce7f0 !important;
+  }
+
+  .vuecal__cell-date {
+    color: black;
+    font-weight: bold;
+  }
+
+  .vuecal__weekday-cell {
+    color: black;
+    font-weight: bold;
+  }
+
+  .vuecal__event {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 10;
+    position: relative;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.8em;
+    text-align: left;
+    overflow: hidden;
+    line-height: 1.3;
+  }
+
+  .vuecal__event:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    z-index: 11;
+  }
+
+  .vuecal__event-title {
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+
+  .vuecal__event-description {
+    display: none;
+  }
+
+  .vuecal__event-time {
+    font-size: 0.7em;
+    opacity: 0.9;
+    margin-top: 2px;
+  }
+}
+
+
+.dark-mode h1 {
+  color: white;
+}
+
+.dark-mode .calendar-content {
+  background-color: rgba(34, 34, 34, 0.9);
+  color: white;
+}
+
+.dark-mode .calendar-legend {
+  background-color: rgba(60, 60, 60, 0.8);
+}
+
+/* FullCalendar 다크 모드 */
+.dark-calendar .fc {
+  color: #f0f0f0;
+}
+
+.dark-calendar .fc-toolbar-title {
+  color: #f0f0f0;
+}
+
+.dark-calendar .fc-button {
+  background-color: #555;
+  color: #eee;
+}
+
+.dark-calendar .fc-button:hover {
+  background-color: #777;
+}
+
+.dark-calendar .fc-col-header-cell,
+.dark-calendar .fc-daygrid-day-number,
+.dark-calendar .fc-list-event-title,
+.dark-calendar .fc-list-event-time {
+  color: #f0f0f0;
+}
+
+.dark-calendar .fc-daygrid-day-frame {
+  border-color: #444;
+}
+
+.dark-calendar .fc-day-today {
+  background-color: #3a3a3a !important;
+}
+
+.dark-calendar .fc-event {
+  background-color: #4a4a4a;
+  border-color: #6a6a6a;
+  color: white;
+}
+
+.dark-calendar .fc-event-main {
+  color: white;
+}
+
+.dark-calendar .vuecal__menu,
+.dark-calendar .vuecal__title-bar,
+.dark-calendar .vuecal__weekdays-headers,
+.dark-calendar .vuecal__body {
+  background-color: #333 !important;
+  color: #eee !important;
+  border-color: #555 !important;
+}
+
+.dark-calendar .vuecal__cell {
+  background-color: #444 !important;
+}
+
+.dark-calendar .vuecal__cell--today {
+  background-color: #555 !important;
+}
+
+.dark-calendar .vuecal__event {
+  background-color: #666 !important;
+  color: #fff !important;
+}
+
+.dark-calendar .vuecal__weekdays-headers .vuecal__weekday-cell,
+.dark-calendar .vuecal__cell-date {
+  color: #ddd !important;
+}
+
+.dark-calendar .vuecal__cell--out-of-scope {
+  background-color: #3a3a3a !important;
+  opacity: 0.7;
+}
+
+.event-color-ff6b81 {
+  background-color: #ff6b81 !important;
+  color: white !important;
+}
+
+.event-color-4dabf7 {
+  background-color: #4dabf7 !important;
+  color: white !important;
+}
+
+.event-color-51cf66 {
+  background-color: #51cf66 !important;
+  color: white !important;
+}
+
+.event-color-f4a261 {
+  background-color: #f4a261 !important;
+  color: white !important;
+}
+
+.event-color-ff7f50 {
+  background-color: #ff7f50 !important;
+  color: white !important;
+}
+
+.event-color-8e44ad {
+  background-color: #8e44ad !important;
+  color: white !important;
+}
+
+.event-color-adb5bd {
+  background-color: #adb5bd !important;
+  color: white !important;
+}
+
+
+/* --- 모달 스타일 (기존 코드 유지) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  z-index: 10;
+}
+
+.modal-content1 {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+   flex-direction: column; 
+  align-items: center;     
+  justify-content: center; 
+  text-align: center;
+  z-index: 10;
+  animation: slideBounceIn 0.4s ease;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content1 h1,
+.modal-content1 h2,
+.modal-content1 p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.modal-content1 h1 {
+  font-size: 1.8em;
+  color: #333;
+}
+
+.modal-content1 h2 {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.modal-content1 p {
+  font-size: 1em;
+  color: #666;
+}
+
+.close-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.8em;
+}
+.fc-event-time {
+  white-space: nowrap;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.fc-event {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/* 필요하다면 특정 색상 이벤트에 대한 텍스트 색상 조정 */
+.event-color-xxxxxx .fc-event-title,
+.event-color-xxxxxx .fc-event-time {
+  color: white;
+  /* 어두운 배경색일 경우 */
+}
+
+/* FullCalendar 헤더 툴바 버튼 */
+.fc .fc-toolbar-title {
+  font-size: 1.5em;
+  /* 제목 크기 조정 */
+}
+
+.fc .fc-button {
+  font-size: 0.85em;
+  /* 버튼 텍스트 크기 조정 */
+  padding: 0.4em 0.6em;
+  /* 버튼 내부 패딩 조정 */
+  white-space: nowrap;
+  /* 버튼 텍스트가 줄바꿈되지 않도록 */
+}
+
+/* 특정 뷰 버튼의 너비가 너무 좁다면 */
+.fc .fc-dayGridMonth-button,
+.fc .fc-timeGridWeek-button,
+.fc .fc-timeGridDay-button,
+.fc .fc-listWeek-button {
+  min-width: 60px;
+}
+
+
+@media (max-width: 1200px) {
+  .fc .fc-button {
+    font-size: 0.75em;
+    padding: 0.3em 0.5em;
+  }
+}
+
+@media (max-width: 920px) {
+  .fc .fc-button {
+    font-size: 0.7em;
+  }
+}
+
+.calendar-content {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+
+.vuecal-custom-theme {
+  width: 100%;
+  height: 550px;
+}
+
+
+/* 모바일 전용 미디어 쿼리 (가장 중요) */
+@media (max-width: 920px) {
+
+  /* isMobile 기준과 일치하도록 */
+  .calendar-content {
+    /* 모바일에서는 너무 큰 max-width 제거 또는 조절 */
+    max-width: 100%;
+    padding: 0 5px;
+    /* 좌우로 약간의 여백 추가 (화면 가장자리에 붙지 않게) */
+  }
+
+  .calendar-main-area {
+    /* 모바일에서는 패딩을 줄이거나 없앱니다. */
+    padding: 0;
+    /* margin-left / right 에 특정 값이 있었다면 auto로 재정의 */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* VueCal 자체의 모바일 스타일 */
+  .vuecal-custom-theme {
+    width: 100%;
+    /* 모바일에서 vue-cal의 시간 슬롯 등이 너무 좁아지지 않도록 최소 너비 조정 */
+    /* min-width: 320px; (예시) */
+  }
+}
+
+.vuecal__event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+
+.vuecal__event-description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.8;
+}
+
+.vuecal__event-time {
+  white-space: nowrap;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+
+/* ✅ 400px 이하 화면에 대한 Vue Cal 이벤트 조정 */
+@media (max-width: 400px) {
+  .vuecal__event {
+    padding: 1px 2px;
+    /* 이벤트 패딩 줄이기 */
+  }
+
+  .vuecal__event-title {
+    font-size: 0.75em;
+    /* 제목 폰트 크기 줄이기 */
+  }
+
+  .vuecal__event-description {
+    font-size: 0.65em;
+    /* 설명 폰트 크기 줄이기 */
+    /* display: none; /* 아주 작은 화면에서는 설명 숨기기 */
+  }
+
+  .vuecal__event-time {
+    font-size: 0.7em;
+    /* 시간 폰트 크기 줄이기 */
+  }
+
+  /* Vue Cal의 시간 슬롯 (왼쪽의 08:00, 08:30 등) 텍스트 크기 조절 */
+  .vuecal__time-cell-content {
+    font-size: 0.7em;
+    /* 시간 셀 폰트 크기 */
+    padding: 2px;
+    /* 패딩 조정 */
+  }
+
+  /* 주간 뷰에서 요일 헤더 (월, 화, 수 등) 폰트 크기 조절 */
+  .vuecal__flex .vuecal__header .vuecal__weekdays-headings .vuecal__weekday-heading {
+    font-size: 0.8em;
+    /* 요일 폰트 크기 */
+  }
+
+  .vuecal__flex .vuecal__header .vuecal__weekdays-headings .vuecal__weekday-heading span:last-child {
+    display: block;
+    /* 날짜도 같이 줄바꿈되도록 */
+    font-size: 0.7em;
+    /* 날짜 폰트 크기 */
+  }
+}
+
+.event-list .event-item {
+  border-bottom: 1px solid #ddd; 
+  padding: 8px 0;                 
+}
+
+.mc-date-small {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 12px;
+}
+.mc-indicator {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  display: flex;
+}
+.mc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 2px;
+}
+.mc-more-count {
+  font-size: 10px;
+  color: #999;
+  margin-left: 2px;
+}
+
+.vuecal-custom-theme .vc-month-day__events {
+  display: none !important;
+}

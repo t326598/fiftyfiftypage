@@ -1,32 +1,47 @@
 <template>
-  <div class="modal-overlay" @click.self="close">
+  <div
+    class="modal-overlay"
+    @click.self="close"
+  >
     <div class="modal-content">
       <h2>프로필 수정</h2>
 
       <div class="form-group">
         <label>타이틀</label>
-        <input v-model="form.title" />
+        <input v-model="form.title">
       </div>
 
       <div class="form-group">
         <label>서브 타이틀</label>
-        <input v-model="form.subContent" />
+        <input v-model="form.subContent">
       </div>
 
       <div class="form-group">
         <label>콘텐츠</label>
-        <textarea v-model="form.content"></textarea>
+        <textarea v-model="form.content" />
       </div>
 
       <div class="form-group">
         <label>이미지</label>
-        <input type="file" accept="image/*" @change="onImageChange" />
-        <img v-if="previewUrl" :src="previewUrl" class="preview" />
+        <input
+          type="file"
+          accept="image/*"
+          @change="onImageChange"
+        >
+        <img
+          v-if="previewUrl"
+          :src="previewUrl"
+          class="preview"
+        >
       </div>
 
       <div class="actions">
-        <button @click="submit">저장</button>
-        <button @click="close">닫기</button>
+        <button @click="submit">
+          저장
+        </button>
+        <button @click="close">
+          닫기
+        </button>
       </div>
     </div>
   </div>
@@ -52,7 +67,7 @@ const form = ref({
   filePath: props.profile.path, // 기존 이미지 경로 (서버 저장된 파일명 등)
 })
 
-const previewUrl = ref<string | null>(`http://localhost:8080/upload/${props.profile.name}`)
+const previewUrl = ref<string | null>(props.profile.path)
 
 const onImageChange = (e: Event) => {
   const file = (e.target as HTMLInputElement).files?.[0]

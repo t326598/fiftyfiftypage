@@ -1,26 +1,30 @@
 import axios from 'axios'
+const API_BASE_URL = process.env.VUE_APP_API_URL;
 
-const instance = axios.create({
-  baseURL: 'http://localhost:8080',
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 20000,
 })
-
+// const api = axios.create({
+//     baseURL: "http://localhost:8080/"
+// })
 
  function checkToday() {
-    return instance.post('/visit');
+    return api.post('/visit');
   }
 
 
 
   function today(){
-      return instance.get("/visit/today");
+      return api.get("/visit/today");
   }
   function totalStats(){
-      return instance.get("/visit/summary");
+      return api.get("/visit/summary");
   }
 
 
   function stats(start : string, end: string){
-      return instance.get("/visit/stats", {params: { start, end }});
+      return api.get("/visit/stats", {params: { start, end }});
   }
 
 export default{

@@ -1,17 +1,37 @@
 <template>
   <div class="login-container">
-    <img src="@/assets/image/3333.svg" alt="FiftyFifty 로고" class="logo" />
+    <img
+      src="@/assets/image/3333.svg"
+      alt="FiftyFifty 로고"
+      class="logo"
+    >
 
     <h2>로그인</h2>
 
-    <input v-model="username" placeholder="아이디" class="input" />
-    <input v-model="password" type="password" placeholder="비밀번호" class="input" />
+    <input
+      v-model="username"
+      placeholder="아이디"
+      class="input"
+    >
+    <input
+      v-model="password"
+      type="password"
+      placeholder="비밀번호"
+      class="input"
+    >
 
-    <button @click="handleLogin" class="login-btn">로그인</button>
+    <button
+      class="login-btn"
+      @click="handleLogin"
+    >
+      로그인
+    </button>
 
     <p class="register-link">
       아직 회원이 아니신가요?
-      <router-link to="/register">회원가입</router-link>
+      <router-link to="/register">
+        회원가입
+      </router-link>
     </p>
   </div>
 </template>

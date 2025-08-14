@@ -1,5 +1,16 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+const API_BASE_URL = process.env.VUE_APP_API_URL;
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 20000,
+})
+
+// const api = axios.create({
+//     baseURL: "http://localhost:8080/"
+// })
+
 export interface FileItem {
   no: number;
   crt: number;
@@ -14,25 +25,26 @@ export interface FileParams {
   crt?: string;
   page?: number;
   rows?: number;
+
+
+
 }
 
-const instance = axios.create({
-    baseURL: "http://localhost:8080/"
-})
+
 
 function insertFile(formData: any){
-    return instance.post("/files", formData);
+    return api.post("/files", formData);
 }
 
 function fetchFiles(params: FileParams) {
-  return instance.get("/files",{params})
+  return api.get("/files",{params})
 }
 function updateFiles(formData: any) {
-  return instance.post("/files/update",formData)
+  return api.post("/files/update",formData)
 }
 
 function deleteImage(no : number) {
-    return instance.delete(`/files/${no}`);
+    return api.delete(`/files/${no}`);
   
 }
 

@@ -1,18 +1,27 @@
 <template>
   <div :class="['mainbody', { 'dark-mode': isDark }]">
+    <WarningPopup />
+    <MainHeader :is-dark="isDark" />
     
-    <MainHeader :isDark="isDark" />
-    
-    <ThemeToggle :isDark="isDark" @toggle="toggleTheme" />
+    <ThemeToggle
+      :is-dark="isDark"
+      @toggle="toggleTheme"
+    />
     <CommunityLinks />
 
-   <CalendarView :isDark="isDark" />
+    <CalendarView :is-dark="isDark" />
 
     <NoticeBoard />
-  <hr class="section-divider" />
+    <hr class="section-divider">
     <YoutubeRankingSlider />
 
-    <hr class="section-divider" />
+    <h1 style="font-size: 20px; margin-bottom: 20px; ">
+      <a
+        style="text-decoration: none;"
+        href="/youtubeVideo"
+      >피프티 최신영상 보러가기</a>
+    </h1>
+    <hr class="section-divider">
     <MemberGallery @select="onSelectMember" />
     <ProfileDetailModal
       v-if="selectedMember"
@@ -22,13 +31,14 @@
 
     <FixedButtons @top="scrollToTop" />
     <FooterBar />
-    <CheckToday/>
+    <CheckToday />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import WarningPopup from '@/components/main/WarningPopup.vue'
 import ThemeToggle from '@/components/main/ThemeToggle.vue'
 import MainHeader from '@/components/main/MainHeader.vue'
 import CommunityLinks from '@/components/main/CommunityLinks.vue'
@@ -60,12 +70,10 @@ function scrollToTop() {
 
 <style scoped>
 .dark-calendar .fc {
-  background-color: #121212;
   color: #ffffff;
 }
 
 .dark-calendar .fc-event {
-  background-color: #333333;
   border-color: #555555;
   color: #ffffff;
 }
@@ -199,6 +207,7 @@ function scrollToTop() {
   display: flex;
   justify-content: center;
   height: 100%;
+  max-height: 800px;
   margin-top: 10px;
 }
 
@@ -397,7 +406,6 @@ function scrollToTop() {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/image/darkback.png');
   transform: translateX(-100%);
   transition: transform 1s ease-in-out;
   z-index: -1;

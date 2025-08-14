@@ -1,8 +1,13 @@
 import axios from 'axios';
+const API_BASE_URL = process.env.VUE_APP_API_URL;
 
-const instance = axios.create({
-    baseURL: "http://localhost:8080/"
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 20000,
 })
+// const api = axios.create({
+//     baseURL: "http://localhost:8080/"
+// })
 
 export interface YoutubeVideo {
   videoId: string;
@@ -17,19 +22,19 @@ export interface YoutubeVideo {
 
 
 function getYoutubeChart(){
-    return instance.get("/api/chart/youtube/today");
+    return api.get("/api/chart/youtube/today");
 }
 
 function MusicChart(){
-  return instance.get("/chart/fifty-fifty")
+  return api.get("/chart/fifty-fifty")
 }
 
 function getVideo(){
-  return instance.get<YoutubeVideo[]>('/video');
+  return api.get<YoutubeVideo[]>('/video');
 }
 
 function getFanVideo(){
-  return instance.get<YoutubeVideo[]>('/video/fan');
+  return api.get<YoutubeVideo[]>('/video/fan');
 }
 
 export default{

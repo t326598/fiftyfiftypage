@@ -19,6 +19,7 @@ const categories: Record<number, string> = {
   4: '공연',
   5: '팬미팅',
   6: '곡발매',
+  7: '생일',
 }
 
 function getCategoryColor(crt: number) {
@@ -29,6 +30,7 @@ function getCategoryColor(crt: number) {
     case 4: return "#f4a261";
     case 5: return "#ff7f50";
     case 6: return "#8e44ad";
+    case 7: return "#63e6be";
     default: return "#adb5bd";
   }
 }

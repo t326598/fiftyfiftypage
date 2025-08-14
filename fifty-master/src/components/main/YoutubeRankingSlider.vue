@@ -1,25 +1,59 @@
 <template>
-   <div class="rank">
-      <h1 style="margin-bottom: 10px;">조회수 TOP 10 영상</h1>
-      <div class="slider-container">
-        <div class="slider-wrapper" ref="sliderRef">
-          <div class="slide-item" v-for="(video, index) in repeatedVideos" :key="index + '-' + video.videoId"
-            @click="goToVideo(video.videoUrl)" style="position: relative;">
-            <!-- 1~3등 랭크 표시 -->
-            <div v-if="video.rank && video.rank <= 3" class="rank-badge top-highlight">TOP {{ video.rank }}</div>
-            <div v-else-if="video.rank && video.rank <= 10" class="rank-badge top-regular">
-              TOP {{ video.rank }}
-            </div>
+  <div class="rank">
+    <h1 style="margin-bottom: 10px;">
+      조회수 TOP 10 영상
+    </h1>
+   
+      
+    <div class="slider-container">
+      <div
+        ref="sliderRef"
+        class="slider-wrapper"
+      >
+        <div
+          v-for="(video, index) in repeatedVideos"
+          :key="index + '-' + video.videoId"
+          class="slide-item"
+          style="position: relative;"
+          @click="goToVideo(video.videoUrl)"
+        >
+          <!-- 1~3등 랭크 표시 -->
+          <div
+            v-if="video.rank && video.rank <= 3"
+            class="rank-badge top-highlight"
+          >
+            TOP {{ video.rank }}
+          </div>
+          <div
+            v-else-if="video.rank && video.rank <= 10"
+            class="rank-badge top-regular"
+          >
+            TOP {{ video.rank }}
+          </div>
 
-            <img :src="video.thumbnailUrl" :alt="video.title" class="thumbnail" />
-            <div class="info">
-              <p class="title" style=" font-size: 20px;">{{ video.title }}</p>
-              <p class="views" style=" font-size: 15px;">{{ formatViews(video.viewCount) }} views</p>
-            </div>
+          <img
+            :src="video.thumbnailUrl"
+            :alt="video.title"
+            class="thumbnail"
+          >
+          <div class="info">
+            <p
+              class="title"
+              style=" font-size: 20px;"
+            >
+              {{ video.title }}
+            </p>
+            <p
+              class="views"
+              style=" font-size: 15px;"
+            >
+              {{ formatViews(video.viewCount) }} views
+            </p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, computed, onBeforeUnmount } from 'vue'

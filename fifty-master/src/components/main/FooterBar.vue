@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer">
+  <footer class="footer">
     <div class="footer-content">
       <p>&copy; 2025 Your Company. All rights reserved.</p>
       <ul class="footer-links">
