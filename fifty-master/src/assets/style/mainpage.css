@@ -1,6 +1,5 @@
 
 .dark-calendar .fc {
-  background-color: #121212;
   color: #ffffff;
 }
 
@@ -125,52 +124,6 @@
   background-color: #e0e0e0;
   color: #333;
 }
-
-.calendar-legend {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.calendar-wrapper {
-  display: flex;
-  justify-content: center;
-  transition: transform 0.1s linear;
-  height: 100%;
-  margin-top: 10px;
-}
-
-
-
-.calendar-content {
-  padding: 50px;
-  color: #000000;
-  font-weight: bold;
-  position: relative;
-  z-index: 1;
-  width: 50%;
-  overflow: hidden;
-  /* 이 부분이 중요! 내부 내용만 보여줍니다 */
-  border-radius: 5%;
-}
-
-.calendar-background {
-  position: absolute;
-  filter: blur(2px);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
-  z-index: 0;
-}
-
-
 .notice-title {
   font-size: 20px;
   font-weight: bold;
@@ -191,7 +144,7 @@
 }
 
 .notice-list {
-  width: 100%;
+  width: 98.9%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -242,7 +195,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 10;
 }
 
 .modal-content1 {
@@ -256,6 +209,7 @@
   overflow-y: auto;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   animation: slideBounceIn 0.4s ease;
+  z-index: 10;
 }
 
 .modal-content h2 {
@@ -297,7 +251,7 @@
   margin: 150px 0 0px 0px;
   position: relative;
   width: 50%;
-  min-width: 600px;
+  min-width: 200px;
   height: auto;
   z-index: 2;
   
@@ -308,10 +262,10 @@
 }
 
 .hero-image1 {
-  min-width: 600px;
    max-width: 1200px;
    max-height: 469.7px;
    margin: -30px 0 0 0;
+   width: 50%;
   z-index: 1;
   position: relative;
 }
@@ -343,6 +297,40 @@
   transform: translateX(-100%);
   transition: transform 1s ease-in-out;
   z-index: -1;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: opacity 0.7s ease, max-height 0.7s ease, margin 0.5s ease;
+  overflow: hidden;
+}
+
+.slide-fade-enter-from {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+
+.slide-fade-enter-to {
+  opacity: 1;
+  max-height: 500px; 
+  margin-bottom: 20px;
+}
+
+.slide-fade-leave-from {
+  opacity: 1;
+  max-height: 500px;
+  margin-bottom: 20px;
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+
+.profile-filter-section {
+  background: rgba(255, 0, 0, 0.1); /* 디버깅용 */
 }
 
 .mainbody.dark-mode::before {
@@ -447,6 +435,7 @@
   background-color: #f5b8cc;
   color: rgb(0, 0, 0);
   border: none;
+  width: 50%;
   padding: 10px 20px;
   border-radius: 12px;
   margin: 20px auto;
@@ -550,7 +539,7 @@ h1 {
 }
 
 .profile-filter-section {
-  background: linear-gradient(to bottom, #ffdeeb, #faf5f6);
+   background: linear-gradient(to bottom, #fda4c8, #fce4ec);
   box-shadow: 0 1px 5px rgba(0,0,0,0.7);
   padding: 1px;
   width: 1300px;
@@ -623,6 +612,7 @@ h1 {
 }
 
 @media (max-width: 1080px) {
+
   .card-image {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -631,19 +621,38 @@ h1 {
     padding: 12px 25px;
     font-size: 16px;
   }
-
-  .profile-box {
+.profile-box {
     margin-top: 20px;
     overflow: hidden;
-    width: 600px;
+    width: 90%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+
+  .member-profile {
+
+    object-fit: cover;
+    object-position: center;
+
+    width: 100%; 
+    height: auto; 
+    max-width: 100%;
+    display: block; 
+    margin: 0 auto; 
   }
 
   .profile-filter-section {
     background: linear-gradient(to bottom, #fda4c8, #fce4ec);
     padding: 10px;
-    width: 800px;
+    width: 95%;
+    max-width: 800px; 
     margin: auto;
     border-radius: 50px;
+    box-sizing: border-box; 
   }
 }
 
@@ -677,6 +686,20 @@ h1 {
   }
 
   @media (max-width: 520px) {
+    .hero-image1 {
+      margin: -30px 0 0 0;
+      z-index: 1;
+        height: auto;
+      position: relative;
+    }
+
+    .fifty-img {
+      min-width: 200px;
+      height: auto;
+      z-index: 2;
+      
+    }
+
     .community {
       grid-template-columns: 1fr;
     }
@@ -716,12 +739,22 @@ h1 {
   }
 
   @media (max-width: 440px) {
-    .calendar-wrapper{
-      width: 450px;
-      margin-left: -12%;
+    .hero-image1 {
+      margin: -15px 0 0 0;
+      z-index: 1;
+        height: auto;
+      position: relative;
     }
-    .fc {
-      font-size: 11px;
+
+    .fifty-img {
+      min-width: 200px;
+      height: auto;
+      z-index: 2;
+      
+    }
+
+    .header{
+      max-width: 600px;
     }
 
   .fc-header-toolbar {
@@ -797,6 +830,7 @@ h1 {
 .member-img {
   width: 100%;
   height: 100%;
+  max-height: 1000px;
   object-fit: cover;
   border-radius: 15px;
   cursor: pointer;
@@ -826,7 +860,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 10;
 }
 
 .modal-content {
@@ -836,7 +870,9 @@ h1 {
 }
 
 .modal-img {
-  height: 500px;
+  min-height: 500px;
+  max-height: 800px;
+  width: 100%;
   object-fit: contain;
   border-radius: 20px;
 }
@@ -970,4 +1006,41 @@ h1 {
 }
 .dark-mode .rank-badge .info p {
   color: #ffffff; /* 일반 색상 */
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.description.large {
+  font-size: 30px;
+}
+
+.description.blue {
+  color: blue;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 14px !important;
+  }
+
+  .description.large {
+    font-size: 18px !important;
+  }
+
+  .notice-image {
+    width: 100%;
+    height: auto;
+  }
 }

@@ -1,41 +1,90 @@
 <template>
   <div :class="['mainbody', { 'dark-mode': isDark }]">
     <!-- 다크모드 토글 버튼 -->
-    <button @click="toggleTheme" class="theme-toggle">{{ isDark ? '☀️' : '🌙' }}</button>
+    <button
+      class="theme-toggle"
+      @click="toggleTheme"
+    >
+      {{ isDark ? '☀️' : '🌙' }}
+    </button>
 
     <!-- 로고 -->
     <div class="header">
-      <transition :name="isDark ? 'slide-dark' : 'slide-light'" mode="out-in">
-        <img :key="isDark ? 'dark-logo' : 'light-logo'"
-          :src="isDark ? require('@/assets/image/test.png') : require('@/assets/image/3333.svg')" alt="fiftyfifty"
-          class="fifty-img" />
+      <transition
+        :name="isDark ? 'slide-dark' : 'slide-light'"
+        mode="out-in"
+      >
+        <img
+          :key="isDark ? 'dark-logo' : 'light-logo'"
+          :src="isDark ? require('@/assets/image/test.png') : require('@/assets/image/3333.svg')"
+          alt="fiftyfifty"
+          class="fifty-img"
+        >
       </transition>
     </div>
 
     <!-- 메인 이미지 -->
-    <section class="hero-image" style="margin-bottom: 30px;">
-      <transition :name="isDark ? 'slide-dark' : 'slide-light'" mode="out-in">
-        <img :key="isDark ? 'dark-hero' : 'light-hero'"
+    <section
+      class="hero-image"
+      style="margin-bottom: 30px;"
+    >
+      <transition
+        :name="isDark ? 'slide-dark' : 'slide-light'"
+        mode="out-in"
+      >
+        <img
+          :key="isDark ? 'dark-hero' : 'light-hero'"
           :src="isDark ? require('@/assets/image/darkmidnight.png') : require('../../assets/image/tofifty.png')"
-          class="hero-image1" alt="FIFTY FIFTY Members" style="border-radius: 20px; width: 60%;" />
+          class="hero-image1"
+          alt="FIFTY FIFTY Members"
+          style="border-radius: 20px; width: 60%;"
+        >
       </transition>
     </section>
 
     <section class="community">
-      <a href="https://www.youtube.com/@WE_FIFTYFIFTY" target="_blank">
-        <img src="@/assets/image/yb.png" alt="YouTube" class="social-icon" />
+      <a
+        href="https://www.youtube.com/@WE_FIFTYFIFTY"
+        target="_blank"
+      >
+        <img
+          src="@/assets/image/yb.png"
+          alt="YouTube"
+          class="social-icon"
+        >
         <p>FIFTY FIFTY YOUTUBE</p>
       </a>
-      <a href="https://www.instagram.com/we_fiftyfifty" target="_blank">
-        <img src="@/assets/image/is.jpg" alt="Instagram" class="social-icon" />
+      <a
+        href="https://www.instagram.com/we_fiftyfifty"
+        target="_blank"
+      >
+        <img
+          src="@/assets/image/is.jpg"
+          alt="Instagram"
+          class="social-icon"
+        >
         <p>FIFTY FIFTY INSTAGRAM</p>
       </a>
-      <a href="https://www.tiktok.com/@we_fiftyfifty" target="_blank">
-        <img src="@/assets/image/tt.png" alt="TikTok" class="social-icon" />
+      <a
+        href="https://www.tiktok.com/@we_fiftyfifty"
+        target="_blank"
+      >
+        <img
+          src="@/assets/image/tt.png"
+          alt="TikTok"
+          class="social-icon"
+        >
         <p>FIFTY FIFTY TIKTOK</p>
       </a>
-      <a href="https://weverse.io/fiftyfifty" target="_blank">
-        <img src="@/assets/image/wb.jpg" alt="Weverse" class="social-icon" />
+      <a
+        href="https://weverse.io/fiftyfifty"
+        target="_blank"
+      >
+        <img
+          src="@/assets/image/wb.jpg"
+          alt="Weverse"
+          class="social-icon"
+        >
         <p>FIFTY FIFTY WEVERSE</p>
       </a>
     </section>
@@ -43,8 +92,10 @@
     <section class="calendar-wrapper">
       <div class="calendar-content">
         <!-- 배경 이미지 -->
-        <div class="calendar-background"
-          :style="{ backgroundImage: `url('http://localhost:8080/upload/${backgroundImage}')` }"></div>
+        <div
+          class="calendar-background"
+          :style="{ backgroundImage: `url('http://localhost:8080/upload/${backgroundImage}')` }"
+        />
 
         <!-- 캘린더 -->
         <CalendarLegend />
@@ -52,106 +103,233 @@
           <FullCalendar :options="calendarOptions" />
         </div>
         <!-- 모달 -->
-        <div v-if="isModalOpen" class="modal-overlay" @click.self="isModalOpen = false">
+        <div
+          v-if="isModalOpen"
+          class="modal-overlay"
+          @click.self="isModalOpen = false"
+        >
           <div class="modal-content1">
             <h1>{{ selectedEvent.title }}</h1>
             <h2>{{ formatDateDay(selectedEvent.start) }}</h2>
             <p> {{ formatDate(selectedEvent.start) }} ~ {{ formatDate(selectedEvent.end) }}</p>
             <p>{{ selectedEvent.description }}</p>
-            <button @click="isModalOpen = false" class="close-btn">닫기</button>
+            <button
+              class="close-btn"
+              @click="isModalOpen = false"
+            >
+              닫기
+            </button>
           </div>
         </div>
       </div>
     </section>
     <section class="notice">
-      <h3 class="notice-title">📢 공지사항</h3>
+      <h3 class="notice-title">
+        📢 공지사항
+      </h3>
       <div class="notice-card">
         <ul class="notice-list">
-
-          <li v-for="(item, index) in notices" :key="index" @click="openPopup(item)" class="notice-item">
+          <li
+            v-for="(item, index) in notices"
+            :key="index"
+            class="notice-item"
+            @click="openPopup(item)"
+          >
             {{ item.title }}
           </li>
         </ul>
       </div>
 
       <!-- 팝업창 -->
-      <div v-if="selectedNotice" class="modal-overlay" @click.self="closePopup">
+      <div
+        v-if="selectedNotice"
+        class="modal-overlay"
+        @click.self="closePopup"
+      >
         <div class="modal-content1">
           <h2>{{ selectedNotice.title }}</h2>
-          <p class="content" style="font-size: 30px;">{{ selectedNotice.content }}</p>
+          <p
+            class="content"
+            style="font-size: 30px;"
+          >
+            {{ selectedNotice.content }}
+          </p>
           <div class="meta">
             <p>등록일자: {{ formatKoreanDateTime(selectedNotice.createdAt) }}</p>
             <p>수정일자: {{ formatKoreanDateTime(selectedNotice.updatedAt) }}</p>
           </div>
-          <button @click="closePopup" class="close-btn">닫기</button>
+          <button
+            class="close-btn"
+            @click="closePopup"
+          >
+            닫기
+          </button>
         </div>
       </div>
     </section>
-    <hr class="section-divider" />
+    <hr class="section-divider">
     <section class="rank">
-      <h1 style="margin-bottom: 10px;">조회수 TOP 10 영상</h1>
+      <h1 style="margin-bottom: 10px;">
+        조회수 TOP 10 영상
+      </h1>
       <div class="slider-container">
-        <div class="slider-wrapper" ref="sliderRef">
-          <div class="slide-item" v-for="(video, index) in repeatedVideos" :key="index + '-' + video.videoId"
-            @click="goToVideo(video.videoUrl)" style="position: relative;">
+        <div
+          ref="sliderRef"
+          class="slider-wrapper"
+        >
+          <div
+            v-for="(video, index) in repeatedVideos"
+            :key="index + '-' + video.videoId"
+            class="slide-item"
+            style="position: relative;"
+            @click="goToVideo(video.videoUrl)"
+          >
             <!-- 1~3등 랭크 표시 -->
-            <div v-if="video.rank && video.rank <= 3" class="rank-badge top-highlight">TOP {{ video.rank }}</div>
-            <div v-else-if="video.rank && video.rank <= 10" class="rank-badge top-regular">
+            <div
+              v-if="video.rank && video.rank <= 3"
+              class="rank-badge top-highlight"
+            >
+              TOP {{ video.rank }}
+            </div>
+            <div
+              v-else-if="video.rank && video.rank <= 10"
+              class="rank-badge top-regular"
+            >
               TOP {{ video.rank }}
             </div>
 
-            <img :src="video.thumbnailUrl" :alt="video.title" class="thumbnail" />
+            <img
+              :src="video.thumbnailUrl"
+              :alt="video.title"
+              class="thumbnail"
+            >
             <div class="info">
-              <p class="title" style=" font-size: 20px;">{{ video.title }}</p>
-              <p class="views" style=" font-size: 15px;">{{ formatViews(video.viewCount) }} views</p>
+              <p
+                class="title"
+                style=" font-size: 20px;"
+              >
+                {{ video.title }}
+              </p>
+              <p
+                class="views"
+                style=" font-size: 15px;"
+              >
+                {{ formatViews(video.viewCount) }} views
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <hr class="section-divider" />
-    <h1 style="margin-bottom: 10px;">멤버 프로필</h1>
-    <section class="profile" style="margin-top: 10px;">
+    <hr class="section-divider">
+    <h1 style="margin-bottom: 10px;">
+      멤버 프로필
+    </h1>
+    <section
+      class="profile"
+      style="margin-top: 10px;"
+    >
       <div class="card-grid">
-        <div v-for="member in profile" :key="member.no" class="member-card" @click="showProfileBox(member)">
-          <img v-if="!isSmallScreen" :src="`http://localhost:8080/upload/${member.filePath}`" :alt="member.title"
-            class="member-img" />
-          <p v-else class="member-text">{{ member.title }}</p>
+        <div
+          v-for="member in profile"
+          :key="member.no"
+          class="member-card"
+          @click="showProfileBox(member)"
+        >
+          <img
+            v-if="!isSmallScreen"
+            :src="member.path"
+            :alt="member.title"
+            class="member-img"
+          >
+          <p
+            v-else
+            class="member-text"
+          >
+            {{ member.title }}
+          </p>
         </div>
       </div>
     </section>
 
     <!-- 프로필 박스 -->
-    <transition name="slide-down" @after-leave="handleAfterLeave">
-      <section v-if="showProfile" class="profile-filter-section" :key="selectedMemberNo?.memberNo">
+    <transition
+      name="slide-down"
+      @after-leave="handleAfterLeave"
+    >
+      <section
+        v-if="showProfile"
+        :key="selectedMemberNo?.memberNo"
+        class="profile-filter-section"
+      >
         <div class="profile-box">
-          <div class="profile-box-content" v-if="selectedMemberNo">
+          <div
+            v-if="selectedMemberNo"
+            class="profile-box-content"
+          >
             <section style="width: 30%; overflow: hidden;">
-              <img :src="`http://localhost:8080/upload/${selectedMemberNo.filePath}`" :alt="selectedMemberNo.title"
-                class="member-profile" style="width: 259px; height: 323px; object-fit: cover;" />
+              <img
+                :src="selectedMemberNo.path"
+                :alt="selectedMemberNo.title"
+                class="member-profile"
+                style="width: 259px; height: 323px; object-fit: cover;"
+              >
             </section>
             <section style="width: 60%; text-align: center;">
-              <h1 style="font-size: 40px;">{{ selectedMemberNo.title }}</h1>
-              <h2 style="color: black; font-size: 25px;">"{{ selectedMemberNo.subContent }}"</h2>
-              <p style="color: black; font-size: 25px;">{{ selectedMemberNo.content }}</p>
+              <h1 style="font-size: 40px;">
+                {{ selectedMemberNo.title }}
+              </h1>
+              <h2 style="color: black; font-size: 25px;">
+                "{{ selectedMemberNo.subContent }}"
+              </h2>
+              <p style="color: black; font-size: 25px;">
+                {{ selectedMemberNo.content }}
+              </p>
             </section>
           </div>
         </div>
-        <button v-if="showProfile" class="close-btn" @click="closeProfileBox">닫기</button>
+        <button
+          v-if="showProfile"
+          class="close-btn"
+          @click="closeProfileBox"
+        >
+          닫기
+        </button>
       </section>
     </transition>
     <section class="card-image-wrapper">
       <div class="card-image">
-        <div v-for="member in displayedMembers" :key="member.no" class="member-card-image"
-          @click="openModal(`http://localhost:8080/upload/${member.name}`)">
-          <img :src="`http://localhost:8080/upload/${member.name}`" :alt="member.name" class="member-img" />
+        <div
+          v-for="member in displayedMembers"
+          :key="member.no"
+          class="member-card-image"
+          @click="openModal(`http://localhost:8080/upload/${member.name}`)"
+        >
+          <img
+            :src="member.path"
+            :alt="member.name"
+            class="member-img"
+          >
         </div>
       </div>
     </section>
-    <div class="pagination" style="margin-top: 50px; color: black;">
-      <button @click="changePage('prev')" :disabled="currentPage === 1">Previous</button>
+    <div
+      class="pagination"
+      style="margin-top: 50px; color: black;"
+    >
+      <button
+        :disabled="currentPage === 1"
+        @click="changePage('prev')"
+      >
+        Previous
+      </button>
       <span>{{ currentPage }} / {{ totalPages }}</span>
-      <button @click="changePage('next')" :disabled="currentPage === totalPages">Next</button>
+      <button
+        :disabled="currentPage === totalPages"
+        @click="changePage('next')"
+      >
+        Next
+      </button>
     </div>
     <footer class="footer">
       <div class="footer-content">
@@ -165,25 +343,42 @@
     </footer>
   </div>
 
-  <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
+  <div
+    v-if="showModal"
+    class="modal-overlay"
+    @click.self="closeModal"
+  >
     <div class="modal-content">
-      <img :src="selectedImage" alt="확대 이미지" class="modal-img" />
-      <button class="modal-close" @click="closeModal">×</button>
+      <img
+        :src="selectedImage"
+        alt="확대 이미지"
+        class="modal-img"
+      >
+      <button
+        class="modal-close"
+        @click="closeModal"
+      >
+        ×
+      </button>
     </div>
   </div>
 
   <div class="fixed-buttons">
-    <button class="top-button" @click="scrollToTop">
+    <button
+      class="top-button"
+      @click="scrollToTop"
+    >
       ⬆️ 최상단
     </button>
-    <a href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer" class="kakao-chat-button">
+    <a
+      href="https://open.kakao.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="kakao-chat-button"
+    >
       💬 카카오톡 문의
     </a>
-
   </div>
-
-
-
 </template>
 
 <script setup lang="ts">
@@ -715,6 +910,7 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   height: 100%;
+    max-height: 800px;
   margin-top: 10px;
 }
 

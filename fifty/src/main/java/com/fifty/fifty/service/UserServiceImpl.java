@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fifty.fifty.domain.UserAuth;
 import com.fifty.fifty.domain.Users;
@@ -12,6 +13,7 @@ import com.fifty.fifty.mapper.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService {
         // 권한 등록
         if (result > 0) {
             UserAuth userAuth = UserAuth.builder()
-                    .userNo(user.getNo())
+                    .username(user.getUsername())
                     .auth("ROLE_USER")
                     .build();
             result += userMapper.insertAuth(userAuth);

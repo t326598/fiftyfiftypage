@@ -18,9 +18,20 @@
                 :key="months.id"
                 class="profileCard text-center"
               >
-              <img :src="`http://localhost:8080/upload/${months.name}`" :alt="months.month" class="member-img" />
-                <h5 class="mt-2">{{ months.month }} 월</h5>
-                <button class="updateBtn mt-1" @click="editCalendar(months.id)">수정</button>
+                <img
+                  :src="months.path"
+                  :alt="months.month"
+                  class="member-img"
+                >
+                <h5 class="mt-2">
+                  {{ months.month }} 월
+                </h5>
+                <button
+                  class="updateBtn mt-1"
+                  @click="editCalendar(months.month)"
+                >
+                  수정
+                </button>
               </div>
             </div>
           </div>
@@ -28,14 +39,12 @@
       </div>
     </div>
   </div>
-    <EditMothsModal
-  v-if="showModal"
-  :months="selectedCalendar"
-  @close="closeModal"
-  @updated="fetchCalendarList"
-/>
-
-
+  <EditMothsModal
+    v-if="showModal"
+    :months="selectedCalendar"
+    @close="closeModal"
+    @updated="fetchCalendarList"
+  />
 </template>
 
 
@@ -62,7 +71,7 @@ const fetchCalendarList = async () => {
 
 
 const editCalendar = (calendarId: number) => {
-  const calendar = calendarList.value.find(c => c.id === calendarId)
+  const calendar = calendarList.value.find(c => c.month === calendarId)
   if (calendar) {
     selectedCalendar.value = { ...calendar }
     showModal.value = true

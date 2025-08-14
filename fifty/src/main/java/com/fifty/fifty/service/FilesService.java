@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.fifty.fifty.domain.FilePath;
+import com.fifty.fifty.domain.Files;
 
 
 public interface FilesService {
     
-    public List<FilePath> AllList() throws Exception;
+    
+    public List<FilePath> AllList(Map<String, Object> params) throws Exception;
 
     public int allCount(Map<String, Object> params) throws Exception;
 

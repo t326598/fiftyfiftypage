@@ -16,7 +16,7 @@ public class FileCleanScheduler {
 
     @Scheduled(cron = "00 00 00 * * ?")
     public void scheduledCleanup() throws Exception {
-        filesServiceImpl.cleanupFiles();
+        // filesServiceImpl.cleanupFiles();
     }
 }
 

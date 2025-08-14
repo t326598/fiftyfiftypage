@@ -29,6 +29,15 @@ const routes: RouteRecordRaw[] = [
   // admin routes
   {
     path: '/admin',
+    name: 'CalenderList',
+    component: CalenderList,
+    meta: {
+      requiresAuth: true,
+      roles: ['ROLE_ADMIN']
+    }
+  },
+  {
+    path: '/admin/insertFiles',
     name: 'insertFiles',
     component: InsertFiles,
     meta: {

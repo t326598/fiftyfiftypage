@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fifty.fifty.domain.Visit;
 import com.fifty.fifty.domain.VisitSummary;
 import com.fifty.fifty.mapper.VisitMapper;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class VisitServiceImpl implements VisitService {
 
     @Autowired

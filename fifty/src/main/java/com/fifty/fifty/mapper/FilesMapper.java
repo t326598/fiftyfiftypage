@@ -11,7 +11,7 @@ import com.fifty.fifty.domain.FilePath;
  @Mapper
 public interface FilesMapper {
     
-    public List<FilePath> AllList() throws Exception;
+    public List<FilePath> AllList(Map<String, Object> params) throws Exception;
 
     public int allCount(Map<String, Object> params) throws Exception;
 

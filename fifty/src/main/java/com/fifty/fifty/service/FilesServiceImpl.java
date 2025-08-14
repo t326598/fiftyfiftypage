@@ -1,8 +1,6 @@
 package com.fifty.fifty.service;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -17,9 +15,11 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fifty.fifty.domain.FilePath;
+import com.fifty.fifty.domain.Files;
 import com.fifty.fifty.mapper.FilesMapper;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class FilesServiceImpl implements FilesService {
 
    
@@ -69,57 +69,13 @@ public class FilesServiceImpl implements FilesService {
 
 }
 
-   @Override
-public int update(FilePath files) throws Exception {
-    int result = 0;
-    try {
-        System.out.println("삭제됨?");
-        System.out.println(files.getOldFilePath());
-        // 기존 파일과 이름이 다르면 삭제 시도
-        if (files.getOldFilePath() != null && !files.getOldFilePath().equals(files.getName())) {
+    @Override
+    public int update(FilePath files) throws Exception {
+        int result = filesMapper.update(files);
 
-            Path oldFile = Paths.get(files.getOldFilePath());
-            try {
-                Files.deleteIfExists(oldFile);
-                System.out.println(" 파일 삭제 성공 또는 없음");
-            } catch (IOException ioe) {
-                System.out.println("파일 삭제 중 오류 발생: " + ioe.getMessage());
-                ioe.printStackTrace();
-            }
-        }
-
-        
-         MultipartFile multipartFile = files.getData();
-        
-        if(multipartFile.isEmpty()){
-            return result;
-        }
-
-    String originName = multipartFile.getOriginalFilename();
-    long fileSize = multipartFile.getSize();
-    String fileName = UUID.randomUUID().toString() + "_" + originName;
-    byte[] fileData = multipartFile.getBytes();
-    String filePath = uploadPath + "/" + fileName;
-
-    File uploadFile = new File(filePath);
-
-    uploadFile.getParentFile();
-    FileCopyUtils.copy(fileData, uploadFile);
-
-    files.setName(fileName);
-    files.setPath(filePath);
-    files.setSize(fileSize);
-
-        // DB 업데이트 시도
-        result = filesMapper.update(files);
-    } catch (Exception e) {
-        System.out.println("update 중 예외 발생: " + e.getMessage());
-        e.printStackTrace();
-        throw e; // 상위로 다시 예외 던짐
+        return result;
     }
 
-    return result;
-}
     @Override
     public int delete(Long no) throws Exception {
        int reustl = filesMapper.delete(no);
@@ -150,8 +106,8 @@ public int update(FilePath files) throws Exception {
     }
 
     @Override
-    public List<FilePath> AllList() throws Exception {
-        return filesMapper.AllList();
+    public List<FilePath> AllList(Map<String, Object> params) throws Exception {
+        return filesMapper.AllList(params);
     }
 
     @Override
@@ -160,18 +116,5 @@ public int update(FilePath files) throws Exception {
     }
 
     
-    @Transactional
-    public void cleanupFiles() throws Exception {
-        List<FilePath> files = filesMapper.AllList();
-
-        for (FilePath file : files) {
-            Path filePath = Paths.get(file.getPath());
-            if (!Files.exists(filePath)) {
-                System.out.println("파일 없음, DB에서 삭제: " + file.getName());
-                filesMapper.delete(file.getNo());
-            }
-        }
-    }
-
     
 }

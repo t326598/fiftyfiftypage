@@ -6,10 +6,9 @@ import lombok.Data;
 
 @Data
 public class Months {
-    private int no;
-    private int fileNo;
+    private int id;
     private int month;
-    private String name;
+    private String imageUrl;
 
     private String oldFilePath;
     private MultipartFile data;

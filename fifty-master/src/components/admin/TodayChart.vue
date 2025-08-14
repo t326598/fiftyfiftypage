@@ -1,33 +1,54 @@
 <template>
-  <div class="p-6 bg-gray-100 min-h-screen" style="margin-bottom: 100px;">
-    <h2 class="text-2xl font-bold mb-4">방문자 통계 대시보드</h2>
+  <div
+    class="p-6 bg-gray-100 min-h-screen"
+    style="margin-bottom: 100px;"
+  >
+    <h2 class="text-2xl font-bold mb-4">
+      방문자 통계 대시보드
+    </h2>
 
     <!-- 요약 카드 -->
     <div class="grid grid-cols-3 gap-4 mb-8">
       <div class="bg-white p-4 rounded shadow">
-        <p class="text-sm text-gray-600">총 방문자</p>
-        <p class="text-2xl font-bold">{{ (totalStats.totalCount ?? 0) }}</p>
+        <p class="text-sm text-gray-600">
+          총 방문자
+        </p>
+        <p class="text-2xl font-bold">
+          {{ (totalStats.totalCount ?? 0) }}
+        </p>
       </div>
       <div class="bg-white p-4 rounded shadow">
-        <p class="text-sm text-gray-600">오늘 방문자</p>
-        <p class="text-2xl font-bold">{{ (todayStats.totalCount ?? 0) }}</p>
+        <p class="text-sm text-gray-600">
+          오늘 방문자
+        </p>
+        <p class="text-2xl font-bold">
+          {{ (todayStats.totalCount ?? 0) }}
+        </p>
       </div>
       <div class="bg-white p-4 rounded shadow">
-        <p class="text-sm text-gray-600">오늘 재방문자</p>
-        <p class="text-2xl font-bold">{{ ((todayStats.totalCount ?? 0) - (todayStats.uniqueCount ?? 0)) }}</p>
+        <p class="text-sm text-gray-600">
+          오늘 재방문자
+        </p>
+        <p class="text-2xl font-bold">
+          {{ ((todayStats.totalCount ?? 0) - (todayStats.uniqueCount ?? 0)) }}
+        </p>
       </div>
     </div>
 
     <!-- 원형 차트 -->
     <div class="bg-white p-4 rounded shadow mb-8">
-      <h3 class="text-lg font-semibold mb-2">재방문자 비율</h3>
-      <canvas ref="pieChartRef"></canvas>
+      <h3 class="text-lg font-semibold mb-2">
+        재방문자 비율
+      </h3>
+      <canvas ref="pieChartRef" />
     </div>
 
     <!-- 라인 차트 -->
     <div class="bg-white p-4 rounded shadow">
-      <h3 class="text-lg font-semibold mb-2">최근 7일 방문자 추이</h3>
-      <canvas ref="lineChartRef"></canvas>
+      <h3 class="text-lg font-semibold mb-2">
+        최근 7일 방문자 추이
+      </h3>
+      <canvas ref="lineChartRef" />
     </div>
   </div>
 </template>

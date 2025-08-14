@@ -1,67 +1,97 @@
 <template>
   <div>
-      <Header />
-            <div class="container">
-              <Sidebar/>
-      <FullCalendar :options="calendarOptions" class="fullcalendars" />
+    <Header />
+    <div class="container">
+      <Sidebar />
+      <FullCalendar
+        :options="calendarOptions"
+        class="fullcalendars"
+      />
 
-    <!-- 모달 -->
-    <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content">
-        <h3>{{ selectedEventIndex !== null ? '일정 수정' : '일정 추가' }}</h3>
+      <!-- 모달 -->
+      <div
+        v-if="isModalOpen"
+        class="modal-overlay"
+        @click.self="closeModal"
+      >
+        <div class="modal-content">
+          <h3>{{ selectedEventIndex !== null ? '일정 수정' : '일정 추가' }}</h3>
 
-        <!-- 카테고리 탭 -->
-        <div class="category-tabs">
-        <button
-          v-for="(name, num) in categories"
-          :key="num"
-          type="button"
-          :class="{ active: form.crt === Number(num) }"
-          @click="form.crt = Number(num)"
-        >
-          {{ name }}
-          
-        </button>
-      </div>
-      
-
-        <form @submit.prevent="submitEvent">
-          <div>
-            <label>일정 제목:</label>
-            <input v-model="form.title" required />
-          </div>
-          <div>
-            <label>시작 시간:</label>
-            <select v-model="form.startTime" required>
-              <option v-for="time in times" :key="time" :value="time">
-                {{ time }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <label>종료 시간:</label>
-            <select v-model="form.endTime" required>
-              <option v-for="time in times" :key="time" :value="time">
-                {{ time }}
-              </option>
-            </select>
-          </div>
-          <div style="margin-top: 1em;">
-            <button type="submit">{{ selectedEventIndex !== null ? '수정 완료' : '추가' }}</button>
-            <button type="button" @click="closeModal">취소</button>
+          <!-- 카테고리 탭 -->
+          <div class="category-tabs">
             <button
-              v-if="selectedEventIndex !== null"
+              v-for="(name, num) in categories"
+              :key="num"
               type="button"
-              style="margin-left: auto; background: #f56c6c; color: white;"
-              @click="deleteEvent"
+              :class="{ active: form.crt === Number(num) }"
+              @click="form.crt = Number(num)"
             >
-              삭제
+              {{ name }}
             </button>
           </div>
-        </form>
+      
+
+          <form @submit.prevent="submitEvent">
+            <div>
+              <label>일정 제목:</label>
+              <input
+                v-model="form.title"
+                required
+              >
+            </div>
+            <div>
+              <label>시작 시간:</label>
+              <select
+                v-model="form.startTime"
+                required
+              >
+                <option
+                  v-for="time in times"
+                  :key="time"
+                  :value="time"
+                >
+                  {{ time }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label>종료 시간:</label>
+              <select
+                v-model="form.endTime"
+                required
+              >
+                <option
+                  v-for="time in times"
+                  :key="time"
+                  :value="time"
+                >
+                  {{ time }}
+                </option>
+              </select>
+            </div>
+            <div style="margin-top: 1em;">
+              <button type="submit">
+                {{ selectedEventIndex !== null ? '수정 완료' : '추가' }}
+              </button>
+              <button
+                type="button"
+                @click="closeModal"
+              >
+                취소
+              </button>
+              <button
+                v-if="selectedEventIndex !== null"
+                type="button"
+                style="margin-left: auto; background: #f56c6c; color: white;"
+                @click="deleteEvent"
+              >
+                삭제
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -95,6 +125,7 @@ const categories: Record<number, string> = {
   4: '무대',
   5: '팬미팅',
   6: '곡발매',
+  7: '생일',
 }
 
 const calendarEvents = ref<CalendarEvent[]>([])

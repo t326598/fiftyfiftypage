@@ -10,24 +10,45 @@
           </div>
           <div style="display: flex; justify-content: end; width: 1300px; gap: 50px; margin-bottom: 20px;">
             <select v-model="selectedCrt">
-              <option value="">전체 카테고리</option>
-              <option value="1">키나</option>
-              <option value="2">문샤넬</option>
-              <option value="3">예원</option>
-              <option value="4">하나</option>
-              <option value="5">아테나</option>
+              <option value="">
+                전체 카테고리
+              </option>
+              <option value="1">
+                키나
+              </option>
+              <option value="2">
+                문샤넬
+              </option>
+              <option value="3">
+                예원
+              </option>
+              <option value="4">
+                하나
+              </option>
+              <option value="5">
+                아테나
+              </option>
             </select>
-            <!-- 연도 선택 -->
             <select v-model="selectedYear">
-                   <option value="">전체 연도</option>
-              <option value="2024">2024년</option>
-              <option value="2025">2025년</option>
+              <option value="">
+                전체 연도
+              </option>
+              <option value="2024">
+                2024년
+              </option>
+              <option value="2025">
+                2025년
+              </option>
             </select>
 
-          <button @click="openInsertPopup" class="button">등록</button>
-        </div>
+            <button
+              class="button"
+              @click="openInsertModal"
+            >
+              등록
+            </button>
+          </div>
 
-          <!-- 이미지 테이블 -->
           <div class="list">
             <table>
               <thead>
@@ -40,55 +61,81 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="member in displayedMembers" :key="member.no">
+                <tr
+                  v-for="member in displayedMembers"
+                  :key="member.no"
+                >
                   <td>
-                    <img :src="`http://localhost:8080/upload/${member.name}`" :alt="member.name" class="member-img" style="height: 60px;" />
+                    <img
+                      :src="member.path"
+                      :alt="member.path"
+                      class="member-img"
+                      style="height: 60px;"
+                    >
                   </td>
                   <td>{{ getCrtName(member.crt) }}</td>
                   <td>{{ member.trueDay || '없음' }}</td>
                   <td>{{ formatDate(member.createdAt) }}</td>
                   <td>
-                    <button @click="deleteImage(member.no)">삭제</button>
+                    <button @click="deleteImage(member.no)">
+                      삭제
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <!-- 페이지네이션 -->
-          <div class="pagination" style="margin-top: 50px; color: black;">
-            <button @click="changePage('prev')" :disabled="currentPage === 1">Previous</button>
+          <div
+            class="pagination"
+            style="margin-top: 50px; color: black;"
+          >
+            <button
+              :disabled="currentPage === 1"
+              @click="changePage('prev')"
+            >
+              Previous
+            </button>
             <span>{{ currentPage }} / {{ totalPages }}</span>
-            <button @click="changePage('next')" :disabled="currentPage === totalPages">Next</button>
+            <button
+              :disabled="currentPage === totalPages"
+              @click="changePage('next')"
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>
     </div>
+
+    <InsertFilesModal
+      v-if="isModalOpen"
+      @close="closeInsertModal"
+      @imageAdded="handleImageAdded"
+    />
   </div>
 </template>
 
-
 <script setup lang="ts">
-import { ref, onMounted,computed,watch } from 'vue'
-import axios from '@/api/files'
+import { ref, onMounted, computed, watch } from 'vue'
+import axios from '@/api/files' // axios 인스턴스 경로 확인
 import Header from '@/components/admin/adminHeader.vue'
 import Sidebar from '@/components/admin/adminSidebar.vue'
+import InsertFilesModal from '@/components/admin/insertFiles.vue' // 새로 만든 모달 컴포넌트 임포트
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-const isModalOpen = ref(false)
-const editData = ref({ no: 0, title: '', content: '' })
-const userList = ref<any[]>([])
+
+const isModalOpen = ref(false) // 모달 가시성 상태
+const userList = ref<any[]>([]) // 사용되지 않는 변수일 경우 제거 가능
 const allImagesLoaded = ref(false)
 const currentPage = ref(Number(route.query.page) || 1)
-const crt = ref('')
+const crt = ref('') // 사용되지 않는 변수일 경우 제거 가능
 const totalItems = ref(0)
 const itemsPerPage = 10 // 한 페이지에 15명씩
-const members = ref([]);
+const members = ref<any[]>([]); // 타입 명확화
 const selectedCrt = ref('')
 const selectedYear = ref('')
-
-
 
 
 const totalPages = computed(() => {
@@ -99,10 +146,11 @@ const totalPages = computed(() => {
 
 // 현재 페이지의 멤버들만 추출
 const displayedMembers = computed(() => {
-  const start = (currentPage.value - currentPage.value) * itemsPerPage
-  const end = start + itemsPerPage
-  return members.value.slice(start, end)
+  const start = (currentPage.value - 1) * itemsPerPage; 
+  const end = start + itemsPerPage;
+  return members.value.slice(start, end);
 })
+
 
 // 페이지 변경
 function changePage(direction: 'next' | 'prev') {
@@ -111,6 +159,7 @@ function changePage(direction: 'next' | 'prev') {
   } else if (direction === 'prev' && currentPage.value > 1) {
     currentPage.value--
   }
+  router.push({ query: { ...route.query, page: currentPage.value } });
 }
 
 watch(currentPage, () => {
@@ -119,16 +168,16 @@ watch(currentPage, () => {
 
 watch([selectedCrt, selectedYear], () => {
   fetchMembers()
-  currentPage.value = 1
+  currentPage.value = 1 // 필터 변경 시 첫 페이지로 이동
 })
 
-// 공지 삭제
+// 이미지 삭제
 const deleteImage = async (no: number) => {
   if (!confirm('정말 삭제하시겠습니까?')) return
   try {
     await axios.deleteImage(no)
     alert('삭제되었습니다.')
-      fetchMembers()
+    fetchMembers() // 삭제 후 리스트 갱신
   } catch (err) {
     console.error('삭제 실패', err)
     alert('삭제 중 오류가 발생했습니다.')
@@ -140,47 +189,38 @@ async function fetchMembers() {
     const response = await axios.fetchFiles({
       crt: selectedCrt.value,
       trueDay: selectedYear.value,
-      page: currentPage.value - 1,
-      rows: itemsPerPage,  // ← 'rows'로 전달
+      page: currentPage.value - 1, // Spring Data JPA Pageable은 0부터 시작하므로 -1
+      rows: itemsPerPage,
     })
-    console.log(response.data)
-    // 받아온 데이터 구조에 따라 처리
-    members.value = response.data.list || []       // 'list' 또는 'members' 키를 서버 응답에 맞게
-    totalItems.value = response.data.total || 0    // 'total' 키를 서버 응답에 맞게
+    console.log("Fetched Data:", response.data)
+    members.value = response.data.list || []
+    totalItems.value = response.data.total || 0
     allImagesLoaded.value = true
   } catch (error) {
     console.error('멤버 목록을 불러오는 데 실패했습니다:', error)
   }
 }
+
 const formatDate = (dateStr: string) => {
   return new Date(dateStr).toLocaleString()
 }
-
 
 onMounted(() => {
   fetchMembers()
 })
 
-const openInsertPopup = () => {
-  const width = 600
-  const height = 400
-  const left = (window.screen.width + width) - 50
-  const top = (window.screen.height - height) / 2
+// 모달 열기 함수
+const openInsertModal = () => {
+  isModalOpen.value = true
+}
 
-   const newWindow = window.open(
-    '/admin', // 라우터 경로
-    '공지사항등록',
-    `width=${width},height=${height},left=${left},top=${top},resizable=no`
-  )
+// 모달 닫기 함수
+const closeInsertModal = () => {
+  isModalOpen.value = false
+}
 
-  
-  const timer = setInterval(() => {
-    if (newWindow?.closed) {
-      clearInterval(timer)
-      fetchMembers() // 등록창 닫히면 리스트 갱신
-    }
-  }, 500)
-  
+const handleImageAdded = () => {
+  fetchMembers() // 이미지 목록 새로고침
 }
 
 
@@ -198,6 +238,7 @@ const getCrtName = (crtValue: string | number): string => {
   }
 
   if (typeof crtValue === 'string') {
+    // 쉼표로 구분된 문자열 처리 (예: "1, 3")
     return crtValue
       .split(',')
       .map(c => map[c.trim()] || '알 수 없음')
@@ -206,40 +247,9 @@ const getCrtName = (crtValue: string | number): string => {
 
   return '알 수 없음'
 }
-
 </script>
 
 <style scoped>
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 500px;
-}
-
-.modal input,
-.modal textarea {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-}
 
 .godDoUser .container {
   display: flex;
@@ -299,11 +309,11 @@ const getCrtName = (crtValue: string | number): string => {
   margin-top: 30px;
   display: flex;
   justify-content: center;
-  width: 1500px;
+  width: 1500px; /* 이 너비는 실제 레이아웃에 맞게 조정 필요 */
 }
 
 .godDoUser table {
-  width: 80%;
+  width: 80%; /* 이 너비는 실제 레이아웃에 맞게 조정 필요 */
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -327,39 +337,65 @@ const getCrtName = (crtValue: string | number): string => {
   margin-top: 100px;
 }
 
-.godDoUser .pagination a {
+.godDoUser .pagination button { /* 버튼에 대한 스타일 추가 */
   margin: 0 5px;
   padding: 8px 16px;
   text-decoration: none;
   color: #008cba;
+  background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
-.godDoUser .pagination a:hover {
+.godDoUser .pagination button:hover:not(:disabled) {
   background-color: #005f73;
   color: white;
 }
 
-.godDoUser .pagination a.active {
-  background-color: #008cba;
-  color: white;
-  border: 1px solid #008cba;
-  pointer-events: none;
+.godDoUser .pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
+
 
 .godDoUser .inner {
   margin-top: 50px;
-  height: 1050px;
-  width: 1500px;
+  height: 1050px; /* 고정 높이 대신 min-height 사용을 고려하세요 */
+  width: 1500px; /* 고정 너비 대신 max-width 및 반응형 디자인 고려 */
   background-color: #e7ecef;
   border-radius: 5%;
   box-sizing: border-box;
+  padding: 20px; /* 내부 여백 추가 */
 }
 
+.godDoUser .title {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
+.godDoUser .title h1 {
+  font-size: 2em;
+  color: #333;
+}
+
+/* 추가된 선택 박스 스타일 */
+select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #008cba;
+    box-shadow: 0 0 0 2px rgba(0, 140, 186, 0.2);
+}
 
 .godDoUser .attendance-table th:nth-child(3),
 .godDoUser .attendance-table td:nth-child(3) {

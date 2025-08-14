@@ -1,57 +1,99 @@
 <template>
-   <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <RouterLink to="/admin/schedule">
-          <h2>관리</h2>
-        </RouterLink>
-      </div>
-      <nav>
-        <ul class="main-menu">
-          <li @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-            <h3>일정</h3>
-            <ul class="sub-menu">
-              <li><RouterLink to="/admin/plan">일정 목록</RouterLink></li>
-            </ul>
-          </li>
-          <li @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-            <h3>이미지 관리</h3>
-            <ul class="sub-menu">
-              <li><RouterLink to="/admin/imageList">이미지 목록</RouterLink></li>
-            </ul>
-          </li>
-          <li @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-            <h3>사용자 현황</h3>
-            <ul class="sub-menu">
-              <li><RouterLink to="/admin/todayChart">사용자 현황</RouterLink></li>
-            </ul>
-          </li>
-          <li @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-            <h3>공지사항</h3>
-            <ul class="sub-menu">
-              <li><RouterLink to="/admin/noticeList">공지사항 목록</RouterLink></li>
-            </ul>
-          </li>
-          <li @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-            <h3>프로필 관리</h3>
-            <ul class="sub-menu">
-              <li><RouterLink to="/admin/profileList">프로필 설정</RouterLink></li>
-            </ul>
-          </li>
-          <li @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-            <h3>달력 관리</h3>
-            <ul class="sub-menu">
-              <li><RouterLink to="/admin/calendarList">달력 보기</RouterLink></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <RouterLink to="/admin/schedule">
+        <h2>관리</h2>
+      </RouterLink>
     </div>
+    <nav>
+      <ul class="main-menu">
+        <li
+          @mouseover="handleMouseOver"
+          @mouseout="handleMouseOut"
+        >
+          <h3>일정</h3>
+          <ul class="sub-menu">
+            <li>
+              <RouterLink to="/admin/plan">
+                일정 목록
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
+        <li
+          @mouseover="handleMouseOver"
+          @mouseout="handleMouseOut"
+        >
+          <h3>이미지 관리</h3>
+          <ul class="sub-menu">
+            <li>
+              <RouterLink to="/admin/imageList">
+                이미지 목록
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
+        <li
+          @mouseover="handleMouseOver"
+          @mouseout="handleMouseOut"
+        >
+          <h3>사용자 현황</h3>
+          <ul class="sub-menu">
+            <li>
+              <RouterLink to="/admin/todayChart">
+                사용자 현황
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
+        <li
+          @mouseover="handleMouseOver"
+          @mouseout="handleMouseOut"
+        >
+          <h3>공지사항</h3>
+          <ul class="sub-menu">
+            <li>
+              <RouterLink to="/admin/noticeList">
+                공지사항 목록
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
+        <li
+          @mouseover="handleMouseOver"
+          @mouseout="handleMouseOut"
+        >
+          <h3>프로필 관리</h3>
+          <ul class="sub-menu">
+            <li>
+              <RouterLink to="/admin/profileList">
+                프로필 설정
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
+        <li
+          @mouseover="handleMouseOver"
+          @mouseout="handleMouseOut"
+        >
+          <h3>달력 관리</h3>
+          <ul class="sub-menu">
+            <li>
+              <RouterLink to="/admin/calendarList">
+                달력 보기
+              </RouterLink>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-    <!-- Slot for content -->
-    <div class="main">
-      <slot />
-    </div>
+  <!-- Slot for content -->
+  <div class="main">
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

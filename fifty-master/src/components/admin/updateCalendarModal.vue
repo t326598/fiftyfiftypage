@@ -1,17 +1,31 @@
 <template>
-  <div class="modal-overlay" @click.self="close">
+  <div
+    class="modal-overlay"
+    @click.self="close"
+  >
     <div class="modal-content">
       <h2>일정 백그라운드</h2>
 
       <div class="form-group">
         <label>이미지</label>
-        <input type="file" @change="onImageChange" />
-        <img v-if="previewUrl" :src="previewUrl" class="preview" />
+        <input
+          type="file"
+          @change="onImageChange"
+        >
+        <img
+          v-if="previewUrl"
+          :src="previewUrl"
+          class="preview"
+        >
       </div>
 
       <div class="actions">
-        <button @click="submit">저장</button>
-        <button @click="close">닫기</button>
+        <button @click="submit">
+          저장
+        </button>
+        <button @click="close">
+          닫기
+        </button>
       </div>
     </div>
   </div>
@@ -34,7 +48,7 @@ const form = ref({
   filePath: props.months.name
 })
 
-const previewUrl = ref<string | null>(`http://localhost:8080/upload/${props.months.name}`)
+const previewUrl = ref<string | null>(props.months.path)
 
 const onImageChange = (e: Event) => {
   const file = (e.target as HTMLInputElement).files?.[0]

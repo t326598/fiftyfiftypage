@@ -1,8 +1,13 @@
 import axios from 'axios'
+const API_BASE_URL = process.env.VUE_APP_API_URL;
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: API_BASE_URL,
+  timeout: 20000,
 })
+// const api = axios.create({
+//     baseURL: "http://localhost:8080/"
+// })
 
 // ✅ 모든 요청 전에 Authorization 헤더에 JWT 자동으로 넣기
 api.interceptors.request.use(
@@ -26,11 +31,7 @@ const register = (data:any) =>
 
 const getUserInfo = () => {
   const token = localStorage.getItem('token')  // 로그인 후 저장한 JWT
-  return api.get('/users/info', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  return api.get('/users/info')
 }
 
 

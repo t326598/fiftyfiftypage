@@ -1,36 +1,40 @@
 import axios from "axios";
+const API_BASE_URL = process.env.VUE_APP_API_URL;
 
-const instance = axios.create({
-    baseURL: "http://localhost:8080/"
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 20000,
 })
-
+// const api = axios.create({
+//     baseURL: "http://localhost:8080/"
+// })
 
 
 function backgroundList(month: number) {
-  return instance.get("/months", { params: { month } });
+  return api.get("/months", { params: { month } });
 }
 
 function updateBackground(data : any){
-    return instance.put("/months", data);
+    return api.put("/months", data);
 }
 
 function getInsertPlan(data : any){
-    return instance.post("/plan", data)
-}
+    return api.post("/plan", data)
+} 
 
 function getUpdatePlan(data:any) {
-    return instance.put("/plan", data)
+    return api.put("/plan", data)
 }
 function getDeletePlan(no:number) {
-    return instance.delete(`/plan/${no}`)  
+    return api.delete(`/plan/${no}`)  
 }
 
 function ListPlan(){
-  return instance.get("/plan");
+  return api.get("/plan");
 }
 
 function ListCalendar(){
-  return instance.get("/months/list");
+  return api.get("/months/list");
 }
 
 export default{

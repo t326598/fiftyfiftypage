@@ -2,14 +2,17 @@
   <div class="admin-layout">
     <!-- Header -->
     <header class="header">
-  
       <div class="header-link">
         <a href="/">홈페이지</a>
-        <button type="button" @click="handleLogout" class="btnst">로그아웃</button>
+        <button
+          type="button"
+          class="btnst"
+          @click="handleLogout"
+        >
+          로그아웃
+        </button>
       </div>
     </header>
-
- 
   </div>
 </template>
 

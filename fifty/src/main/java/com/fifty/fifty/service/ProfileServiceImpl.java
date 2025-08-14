@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fifty.fifty.domain.Profile;
 import com.fifty.fifty.mapper.ProfileMapper;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ProfileServiceImpl implements ProfileService {
 
     @Autowired
