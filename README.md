@@ -27,7 +27,8 @@
 ### :bulb: 주요기능
 
 
-- **테마 전환**
+ **테마 전환**
+ <br>
   ![2025-06-05_18-21-45](https://github.com/user-attachments/assets/2fd657ba-4973-4c51-837c-bfaf5a9a0fd3)
   <p>
     로고, 배경 아이콘을 모두 테마별 리소스로 분리
@@ -44,21 +45,16 @@
 
   <p>하나의 페이지로 구현되는 각 기능들을 독립된 컴포넌트로 분리하여  재사용성과 유지보수성을 높였습니다.
       또한 함수 및 변수의 이름이 역할이 드러나도록 설계해 기능 탐색의 편의성을 향상시키고 TypeScript를 사용하여 잘못된 정보가 들어가지 않도록 설계하였습니다.</p>
-<br><br><br>
+<br>
 
  **카테고리 별 일정 캘린더**
 ![2025-06-05_18-21-45_2](https://github.com/user-attachments/assets/9e1d4958-d4b6-45a6-9156-4d9a4c39e0ec)
 ![bandicam 2025-05-31 01-12-50-787](https://github.com/user-attachments/assets/ac35d3c0-71d4-4038-8398-f81d8a4260d4)
-
   <p>
 음방, 컴백 등 crt 필드를 가진 이벤트 컬렉션 FullCalendar.js 사용 및 카테고리 별 색상 표시
 
 일정 데이터를 조회하기 전, 백엔드에서 crt 필드를 기준으로 각 일정의 카테고리를 구분하고, 프론트에는 색상 정보와 함께 전달되도록 하여 사용자가 일정을 직관적으로 구분할 수 있도록 했습니다.
   </p>
-
-<br><br><br>
-
-
   ### :bulb: 애로사항
   <p>
     Fullcalendar 커스터마이징으로 모바일 반응형 한계
@@ -66,10 +62,8 @@
   <p>
     모바일에서는 보다 최적화된 Vue-cal 활용해서 pc 화면에서는 Fullcalendar, 모바일에서는 Vue-cal로 구현
   </p>
-<br><br><br>
+<br>
 
-
-  <br><br><br>
  **유튜브 TOP 10 자동 업데이트**
 
  ![2025-06-05_18-21-45_4](https://github.com/user-attachments/assets/066c9aa2-352e-4d72-9b55-dbe9803fad7c)
@@ -88,7 +82,7 @@
     2. 외부 페이지인 UpdateRobot 페이지를 활용해 10분마다 요청 전달 이후 서버 슬립 없이 동작 확인인
   </p>
 
-<br><br><br>
+<br>
 
 ![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
 ![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
@@ -97,7 +91,7 @@
 <p>Spring에서 제공하는 @Scheduled 기능을 활용하여 매일 오전 9시 마다 Youtube API를 활용해 조회수 탑 10개 영상을 가져오도록 설계했으며 필터처리를 통해 특정 날짜 이후 특정 단어를 제외한 검색기록만 가져오도록 설계하여 잘못된 정보가 들어오지 않도록 구현하였습니다.</p>
 
 <p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
-<br><br><br>
+ <br>
 
  **Today 체크 및 시각화**
 ![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
@@ -120,7 +114,7 @@
   <p>
     DB에 이미지를 체크하여 DB에는 있지만 경로에 이미지가 없는 경우 DB를 자동으로 삭제하도록 구현하여 불필요한 용량이 차지하지 않도록 설계하였습니다.
   </p>
-<br><br><br>
+ <br>
    
    **이미지 갤러리**
 ![2025-06-05_18-21-45_5](https://github.com/user-attachments/assets/0dbe44f9-e9f5-457f-acad-2951ebff93c2)
@@ -136,7 +130,7 @@
   </p>
   <p>
     페이지 접속 시 모든 데이터를 가져오고 Front-end에서 페이징 및 필터 처리를 진행해 유저 사용성 높임  </p>
-<br><br><br>
+ <br>
 
 ![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
 ![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
@@ -146,7 +140,7 @@
 
 <p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
 
-<br><br><br>
+ <br>
  **Today 체크 및 시각화**
 ![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
  <p>
@@ -162,7 +156,8 @@
    기존 back-end에서 저장하던 쿠키를 front-end에서 바로 저장하고 전달해 확인하는 방식으로 변경
   </p>
 
-<br><br><br>
+ <br>
+ 
  **DB 데이터 자동 삭제**
  ![bandicam 2025-06-10 16-41-38-923](https://github.com/user-attachments/assets/c3c66b36-d21d-4827-b1ba-4e5d72315060)
 ![bandicam 2025-06-10 16-41-51-029](https://github.com/user-attachments/assets/4e437ecd-2718-4e02-9462-1841d31e8d38)
@@ -170,7 +165,7 @@
     DB에 이미지를 체크하여 DB에는 있지만 경로에 이미지가 없는 경우 DB를 자동으로 삭제하도록 구현하여 불필요한 용량이 차지하지 않도록 설계하였습니다.
   </p>
   
-<br><br><br>
+ <br>
 
    **이미지 갤러리**
    ![2025-06-05_18-21-45_5](https://github.com/user-attachments/assets/0dbe44f9-e9f5-457f-acad-2951ebff93c2)
@@ -188,7 +183,7 @@
     페이지 접속 시 모든 데이터를 가져오고 Front-end에서 페이징 및 필터 처리를 진행해 유저 경험 개선선
   </p>
 
-<br><br><br>
+ <br>
 
    **유튜브 최신영상 가져오기**
 
@@ -198,7 +193,8 @@
 YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다. 또한 특정 키워드로 반복 진행해 잘못된 정보가 들어오지않고 원하는 정보가 들어오도록 필터링 처리하였습니다. (특정키워드, 구독자수, 필터링 키워드 등)
 
 
-
+ <br>
+ 
 **어드민 페이지**
 ![bandicam 2025-05-30 19-11-03-897](https://github.com/user-attachments/assets/fab41c6c-3870-421e-be31-4bc9b10ef3a7)
 
@@ -206,7 +202,7 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
     Spring Security와 JWT 토큰을 활용한 로그인 기능 구현해 ADMIN 권한이 있는 유저만 접속 가능
   </p>
 
-<br><br><br>
+ <br>
 
 
 **Swagger API 문서화**
@@ -215,7 +211,8 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 
 서버 문제 발생시 비즈니스로직 확인을 위해 swagger api를 활용해 문서화 진행
   
-<br><br><br>
+ <br>
+ 
 ### :bulb: 사용 기술
 <p>사용 언어 : HTML5, CSS3, Java, SQL, TypeScript(5.0v) </p>
 
@@ -234,11 +231,13 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 
 <p>배포환경 : Netlify, Render, AWS S3, AWS CloudFront, AWS RDS, Docker </p>
 
-<br><br><br>
+ <br>
+ 
 ### :bulb: ⚙ 프로젝트 설계 ERD
 ![bandicam 2025-06-25 14-43-47-074](https://github.com/user-attachments/assets/45dda539-4e7b-4e3c-a912-0a816c89c0b9)
 
-<br><br><br>
+ <br>
+ 
 ### :bulb: 트러블슈팅
 1. IllegalStateException 에러발생
    에러원인 Spring Boot Devtools 기능 중 라이브 리로딩 진행시 컨텍스트를 종료후 시작하는 과정에서 Mybatis 메퍼 파일 로드하려고해서 발생하는 오류
@@ -262,7 +261,8 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
    방법1: AWS RDS서버는 서울이지만 Render 서버는 북미인걸 확인 북미 서버 > 싱가포르 서버로 변경 이후 93초 > 77초로 단축
    방법2: 지연 초기화를 활성화 spring.main.lazy-initialization=true 와 HikariCP 커넥션 풀 설정을 커스터마이징해 서버 런타임 총 93초 > 43초로 단축해 이상없이 배포를 완료했습니다.
    
-<br><br><br>
+ <br>
+ 
 ### :bulb: 학습포인트
 - 컴포넌트 단위 분리와 TypeScript로 안전한 코드 작성
 - Spring Boot에서 @Scheduled를 이용한 스케줄러 구현
@@ -273,7 +273,8 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 - Chart.js를 활용한 데이터 시각화 구현
 - YouTube api를 활용해 오픈 api 연동
 - Netlify, Render, AWS S3, AWS CloudFront, AWS RDS로 배포하고 Git Action 을 활용해 CI/CD 전반적인 관리 경험
-<br><br><br>
+ <br>
+ 
 ### :bulb: ⚙ 프로젝트 보완 및 아쉬운점
 - WebSocket을 활용해 캘린더 일정이 다가올 경우 실시간으로 페이지 알람 요청 예정
 - Redis 캐시를 활용한 속도 향상 및 효율 증진 작업 필요
