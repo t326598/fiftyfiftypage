@@ -31,6 +31,13 @@
   <p>
     로고, 배경 아이콘을 모두 테마별 리소스로 분리
   </p>
+  ### :bulb: 애로사항
+  <p>
+    배포시 이미지 불러오는 과정에서 버벅거림 발생 
+  </p>
+  <p>
+    기존 transition으로 이미지를 가져오는 방식에서 이미지 두개를 미리 로드해두고 opacity로 이상없이 화면에 나오도록 구현
+  </p>
 
 ![bandicam 2025-05-31 02-01-34-160](https://github.com/user-attachments/assets/72247bc7-d7ef-4bc8-a875-a92c9b9160e9)
 
@@ -46,19 +53,39 @@
 
 일정 데이터를 조회하기 전, 백엔드에서 crt 필드를 기준으로 각 일정의 카테고리를 구분하고, 프론트에는 색상 정보와 함께 전달되도록 하여 사용자가 일정을 직관적으로 구분할 수 있도록 했습니다.
   </p>
+
+  ### :bulb: 애로사항
+  <p>
+    Fullcalendar 커스터마이징으로 모바일 반응형 한계
+  </p>
+  <p>
+    모바일에서는 보다 최적화된 Vue-cal 활용해서 pc 화면에서는 Fullcalendar, 모바일에서는 Vue-cal로 구현
+  </p>
   
 - **유튜브 TOP 10 자동 업데이트**
 - ![2025-06-05_18-21-45_4](https://github.com/user-attachments/assets/066c9aa2-352e-4d72-9b55-dbe9803fad7c)
 
   <p>
-    @Scheduled 을 사용해 매일 오전 9시마다 피프티로 영상 검색 후 
+    @Scheduled과 Cron을 사용해 매일 오전 9시마다 피프티로 영상 검색 후 
     필터 처리 후 DB에 탑 10 영상 썸네일, 주소, view, 제목 저장 및 조회
   </p>
+
+   ### :bulb: 애로사항
+  <p>
+    Render 서버 무료버전으로 서버 슬립 상태로 돌입하여 스케줄이 동작하지 않는 현상 발생
+  </p>
+  <p>
+    1. Git Action을 활용해 healthz http 메소드에 요청을 10분마다 전달하도록 설정 -> Git action이 정상적으로 동작하지 않음
+    2. 외부 페이지인 UpdateRobot 페이지를 활용해 10분마다 요청 전달 이후 서버 슬립 없이 동작 확인인
+  </p>
+
 ![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
 ![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
 
 
 <p>Spring에서 제공하는 @Scheduled 기능을 활용하여 매일 오전 9시 마다 Youtube API를 활용해 조회수 탑 10개 영상을 가져오도록 설계했으며 필터처리를 통해 특정 날짜 이후 특정 단어를 제외한 검색기록만 가져오도록 설계하여 잘못된 정보가 들어오지 않도록 구현하였습니다.</p>
+
+<p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
 
 - **Today 체크 및 시각화**
 ![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
@@ -66,6 +93,14 @@
   페이지 접속시 today를 체크해 카운팅 진행 후 23:59까지 유효한 쿠키를 생성해 신규/재방문 유입을 체크해 Chart.js를 통해 시각화를 진행했습니다.
    해당 기능을 통해 어떤 날 유입이 가장 많은지 파악하며 상황에 유동적으로 대처할수 있습니다.
  </p>
+
+    ### :bulb: 애로사항
+  <p>
+    배포 이후 기존 back-end에서 진행하던 투데이 쿠키 저장이 동작하지 않는 현상 발생
+  </p>
+  <p>
+   기존 back-end에서 저장하던 쿠키를 front-end에서 바로 저장하고 전달해 확인하는 방식으로 변경
+  </p>
 
 - **DB 데이터 자동 삭제**
 - ![bandicam 2025-06-10 16-41-38-923](https://github.com/user-attachments/assets/c3c66b36-d21d-4827-b1ba-4e5d72315060)
@@ -81,6 +116,60 @@
   <p>
     backend 에서 페이징 처리를 진행하여 접속시 과도한 리소스 방지
   </p>
+
+     ### :bulb: 애로사항
+  <p>
+    페이징 및 필터 이동시 마다 끊기는 현상 발생
+  </p>
+  <p>
+    페이지 접속 시 모든 데이터를 가져오고 Front-end에서 페이징 및 필터 처리를 진행해 유저 사용성 높임  </p>
+
+![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
+![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
+
+
+<p>Spring에서 제공하는 @Scheduled 기능을 활용하여 매일 오전 9시 마다 Youtube API를 활용해 조회수 탑 10개 영상을 가져오도록 설계했으며 필터처리를 통해 특정 날짜 이후 특정 단어를 제외한 검색기록만 가져오도록 설계하여 잘못된 정보가 들어오지 않도록 구현하였습니다.</p>
+
+<p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
+
+- **Today 체크 및 시각화**
+![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
+ <p>
+  페이지 접속시 today를 체크해 카운팅 진행 후 23:59까지 유효한 쿠키를 생성해 신규/재방문 유입을 체크해 Chart.js를 통해 시각화를 진행했습니다.
+   해당 기능을 통해 어떤 날 유입이 가장 많은지 파악하며 상황에 유동적으로 대처할수 있습니다.
+ </p>
+
+    ### :bulb: 애로사항
+  <p>
+    배포 이후 기존 back-end에서 진행하던 투데이 쿠키 저장이 동작하지 않는 현상 발생
+  </p>
+  <p>
+   기존 back-end에서 저장하던 쿠키를 front-end에서 바로 저장하고 전달해 확인하는 방식으로 변경
+  </p>
+
+- **DB 데이터 자동 삭제**
+- ![bandicam 2025-06-10 16-41-38-923](https://github.com/user-attachments/assets/c3c66b36-d21d-4827-b1ba-4e5d72315060)
+![bandicam 2025-06-10 16-41-51-029](https://github.com/user-attachments/assets/4e437ecd-2718-4e02-9462-1841d31e8d38)
+  <p>
+    DB에 이미지를 체크하여 DB에는 있지만 경로에 이미지가 없는 경우 DB를 자동으로 삭제하도록 구현하여 불필요한 용량이 차지하지 않도록 설계하였습니다.
+  </p>
+
+  - **이미지 갤러리**
+  - ![2025-06-05_18-21-45_5](https://github.com/user-attachments/assets/0dbe44f9-e9f5-457f-acad-2951ebff93c2)
+![2025-06-05_18-21-45_6](https://github.com/user-attachments/assets/b8af6da0-5c44-4e52-b681-b595805802b2)
+
+  <p>
+    backend 에서 페이징 처리를 진행하여 접속시 과도한 리소스 방지
+  </p>
+
+     ### :bulb: 애로사항
+  <p>
+    페이징 및 필터 이동시 마다 끊기는 현상 발생
+  </p>
+  <p>
+    페이지 접속 시 모든 데이터를 가져오고 Front-end에서 페이징 및 필터 처리를 진행해 유저 경험 개선선
+  </p>
+
   - ** 유튜브 최신 영상 가져오기**
 
   ![bandicam 2025-06-25 12-50-55-924](https://github.com/user-attachments/assets/708ff4e1-f6dc-4a2f-9ea0-0ce35565a827)
@@ -100,7 +189,7 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 ![image](https://github.com/user-attachments/assets/c7cee12f-8471-47f5-85dd-326728e93869)
 
 
-서버 문제 발생시 비즈니스로직 확인을 위해 swagger api를 활용해 테스트하며 문제점을 찾아 진행하였습니다.
+서버 문제 발생시 비즈니스로직 확인을 위해 swagger api를 활용해 문서화 진행
   
 
 ### :bulb: 사용 기술
@@ -147,7 +236,7 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
    Render같은 경우 60초 내에 서버를 실행해야하는데 서버 실행이 90초이상 걸려 발생하는 에러라 판단
 
    방법1: AWS RDS서버는 서울이지만 Render 서버는 북미인걸 확인 북미 서버 > 싱가포르 서버로 변경 이후 93초 > 77초로 단축
-   방법2: 지연 초기화를 활성화 spring.main.lazy-initialization=true 를 사용하여 필요한 빈만 생성되도록 수정하자 빈 생성이 57초 > 23초로 단축 총 93초 > 43초로 단축해 이상없이 배포를 완료했습니다.
+   방법2: 지연 초기화를 활성화 spring.main.lazy-initialization=true 와 HikariCP 커넥션 풀 설정을 커스터마이징해 서버 런타임 총 93초 > 43초로 단축해 이상없이 배포를 완료했습니다.
    
 
 ### :bulb: 학습포인트
@@ -155,14 +244,14 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 - Spring Boot에서 @Scheduled를 이용한 스케줄러 구현
 - JWT 토큰 기반 인증 및 권한 관리
 - REST API 문서화 및 테스트 자동화(Swagger)
+- ThreadPoolTaskScheduler를 활용한 스레드 커스터마이징
 - DB 자동 정리 로직 설계 및 구현
 - Chart.js를 활용한 데이터 시각화 구현
 - YouTube api를 활용해 오픈 api 연동
 - Netlify, Render, AWS S3, AWS CloudFront, AWS RDS로 배포하고 Git Action 을 활용해 CI/CD 전반적인 관리 경험
 
 ### :bulb: ⚙ 프로젝트 보완 및 아쉬운점
-- Toast를 활용한 전역 에러 처리(진행중_)
 - WebSocket을 활용해 캘린더 일정이 다가올 경우 실시간으로 페이지 알람 요청 예정
-- Youtube 탑 10 영상 조회시 Redis 캐시를 활용한 속도 향상 작업 필요
+- Redis 캐시를 활용한 속도 향상 및 효율 증진 작업 필요
 - **Papago API를 활용한 다국어 번역 기능 추가 예정**
 
