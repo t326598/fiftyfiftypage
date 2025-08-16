@@ -10,6 +10,7 @@ onMounted(async () => {
   } catch (error) {
     console.error('투데이 방문자 증가 실패:', error);
   }
+  
 });
 </script>
 

@@ -15,7 +15,6 @@
         </li>
       </ul>
     </div>
-
     <!-- 팝업창 -->
     <div
       v-if="selectedNotice"

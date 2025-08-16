@@ -11,13 +11,13 @@
         class="fifty-img"
       >
     </transition>
-   
 
     <!-- 메인 이미지 -->
     <section
       class="hero-image"
       style="margin-bottom: 30px;"
     >
+    
       <transition
         :name="isDark ? 'slide-dark' : 'slide-light'"
         mode="out-in"

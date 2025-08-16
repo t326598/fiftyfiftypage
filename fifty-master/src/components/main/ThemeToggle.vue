@@ -14,7 +14,6 @@
         :class="{ visible: isDark }"
         alt="Night"
       />
-
       <!-- ✅ 버튼은 별도 z-index로 위에 위치 -->
       <button class="click-zone day" @click="setDay" />
       <button class="click-zone night" @click="setNight" />

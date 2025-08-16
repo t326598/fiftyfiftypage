@@ -18,6 +18,7 @@
     >
       서버비 무서웡..
     </p>
+    
     <img
       src="@/assets/image/day&night.gif"
       alt="day&night"

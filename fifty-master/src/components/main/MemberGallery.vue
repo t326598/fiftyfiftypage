@@ -10,8 +10,6 @@
       </div>
     </div>
   </template>
-
-
   <transition name="slide-down" @after-leave="handleAfterLeave">
     <div v-if="showProfile && !isSmallScreen" class="profile-filter-section" :key="selectedMemberNo?.memberNo">
       <div class="profile-box">

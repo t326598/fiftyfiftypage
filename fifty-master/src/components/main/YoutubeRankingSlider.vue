@@ -3,8 +3,6 @@
     <h1 style="margin-bottom: 10px;">
       조회수 TOP 10 영상
     </h1>
-   
-      
     <div class="slider-container">
       <div
         ref="sliderRef"

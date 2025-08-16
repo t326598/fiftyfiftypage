@@ -9,7 +9,6 @@ import CheckToday from '@/components/main/CheckToday.vue'
 const videos = ref<YoutubeVideo[]>([]);
 const fanVideos = ref<YoutubeVideo[]>([]);
 const loading = ref(false);
-
 const selectedVideo =ref<'all'|'fansign'>('all');
 
 // 페이징처리

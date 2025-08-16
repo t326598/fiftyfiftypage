@@ -8,6 +8,7 @@
         <div v-if="!isMobile">
           <FullCalendar :options="fullCalendarOptions" ref="fullCalendarRef"></FullCalendar>
         </div>
+        
 
         <div v-else>
           <VueCal class="vuecal-custom-theme" :events="vueCalEvents" locale="ko" active-view="month"
