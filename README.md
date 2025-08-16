@@ -26,8 +26,8 @@
 
 ### :bulb: 주요기능
 
-- **테마 전환**
-- ![2025-06-05_18-21-45](https://github.com/user-attachments/assets/2fd657ba-4973-4c51-837c-bfaf5a9a0fd3)
+ **테마 전환**
+![2025-06-05_18-21-45](https://github.com/user-attachments/assets/2fd657ba-4973-4c51-837c-bfaf5a9a0fd3)
   <p>
     로고, 배경 아이콘을 모두 테마별 리소스로 분리
   </p>
@@ -43,10 +43,11 @@
 
   <p>하나의 페이지로 구현되는 각 기능들을 독립된 컴포넌트로 분리하여  재사용성과 유지보수성을 높였습니다.
       또한 함수 및 변수의 이름이 역할이 드러나도록 설계해 기능 탐색의 편의성을 향상시키고 TypeScript를 사용하여 잘못된 정보가 들어가지 않도록 설계하였습니다.</p>
+<br><br><br>
 
-- **카테고리 별 일정 캘린더**
-- ![2025-06-05_18-21-45_2](https://github.com/user-attachments/assets/9e1d4958-d4b6-45a6-9156-4d9a4c39e0ec)
-- ![bandicam 2025-05-31 01-12-50-787](https://github.com/user-attachments/assets/ac35d3c0-71d4-4038-8398-f81d8a4260d4)
+ **카테고리 별 일정 캘린더**
+![2025-06-05_18-21-45_2](https://github.com/user-attachments/assets/9e1d4958-d4b6-45a6-9156-4d9a4c39e0ec)
+![bandicam 2025-05-31 01-12-50-787](https://github.com/user-attachments/assets/ac35d3c0-71d4-4038-8398-f81d8a4260d4)
 
   <p>
 음방, 컴백 등 crt 필드를 가진 이벤트 컬렉션 FullCalendar.js 사용 및 카테고리 별 색상 표시
@@ -54,7 +55,7 @@
 일정 데이터를 조회하기 전, 백엔드에서 crt 필드를 기준으로 각 일정의 카테고리를 구분하고, 프론트에는 색상 정보와 함께 전달되도록 하여 사용자가 일정을 직관적으로 구분할 수 있도록 했습니다.
   </p>
 
-
+<br><br><br>
 
   ### :bulb: 애로사항
   <p>
@@ -65,9 +66,9 @@
   </p>
 
 
-  
-- **유튜브 TOP 10 자동 업데이트**
-- ![2025-06-05_18-21-45_4](https://github.com/user-attachments/assets/066c9aa2-352e-4d72-9b55-dbe9803fad7c)
+  <br><br><br>
+ **유튜브 TOP 10 자동 업데이트**
+ ![2025-06-05_18-21-45_4](https://github.com/user-attachments/assets/066c9aa2-352e-4d72-9b55-dbe9803fad7c)
 
   <p>
     @Scheduled과 Cron을 사용해 매일 오전 9시마다 피프티로 영상 검색 후 
@@ -83,7 +84,7 @@
     2. 외부 페이지인 UpdateRobot 페이지를 활용해 10분마다 요청 전달 이후 서버 슬립 없이 동작 확인인
   </p>
 
-
+<br><br><br>
 
 ![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
 ![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
