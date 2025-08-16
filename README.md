@@ -48,6 +48,7 @@
 <br>
 
  **카테고리 별 일정 캘린더**
+  <br>
 ![2025-06-05_18-21-45_2](https://github.com/user-attachments/assets/9e1d4958-d4b6-45a6-9156-4d9a4c39e0ec)
 ![bandicam 2025-05-31 01-12-50-787](https://github.com/user-attachments/assets/ac35d3c0-71d4-4038-8398-f81d8a4260d4)
   <p>
@@ -65,7 +66,7 @@
 <br>
 
  **유튜브 TOP 10 자동 업데이트**
-
+ <br>
  ![2025-06-05_18-21-45_4](https://github.com/user-attachments/assets/066c9aa2-352e-4d72-9b55-dbe9803fad7c)
 
   <p>
@@ -74,6 +75,7 @@
   </p>
 
    ### :bulb: 애로사항
+    <br>
   <p>
     Render 서버 무료버전으로 서버 슬립 상태로 돌입하여 스케줄이 동작하지 않는 현상 발생
   </p>
@@ -94,6 +96,7 @@
  <br>
 
  **Today 체크 및 시각화**
+  <br>
 ![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
  <p>
   페이지 접속시 today를 체크해 카운팅 진행 후 23:59까지 유효한 쿠키를 생성해 신규/재방문 유입을 체크해 Chart.js를 통해 시각화를 진행했습니다.
@@ -109,6 +112,7 @@
   </p>
 
  **DB 데이터 자동 삭제**
+  <br>
 ![bandicam 2025-06-10 16-41-38-923](https://github.com/user-attachments/assets/c3c66b36-d21d-4827-b1ba-4e5d72315060)
 ![bandicam 2025-06-10 16-41-51-029](https://github.com/user-attachments/assets/4e437ecd-2718-4e02-9462-1841d31e8d38)
   <p>
@@ -117,6 +121,7 @@
  <br>
    
    **이미지 갤러리**
+    <br>
 ![2025-06-05_18-21-45_5](https://github.com/user-attachments/assets/0dbe44f9-e9f5-457f-acad-2951ebff93c2)
 ![2025-06-05_18-21-45_6](https://github.com/user-attachments/assets/b8af6da0-5c44-4e52-b681-b595805802b2)
 
@@ -141,7 +146,9 @@
 <p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
 
  <br>
+ 
  **Today 체크 및 시각화**
+  <br>
 ![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
  <p>
   페이지 접속시 today를 체크해 카운팅 진행 후 23:59까지 유효한 쿠키를 생성해 신규/재방문 유입을 체크해 Chart.js를 통해 시각화를 진행했습니다.
@@ -159,6 +166,7 @@
  <br>
  
  **DB 데이터 자동 삭제**
+  <br>
  ![bandicam 2025-06-10 16-41-38-923](https://github.com/user-attachments/assets/c3c66b36-d21d-4827-b1ba-4e5d72315060)
 ![bandicam 2025-06-10 16-41-51-029](https://github.com/user-attachments/assets/4e437ecd-2718-4e02-9462-1841d31e8d38)
   <p>
@@ -168,6 +176,7 @@
  <br>
 
    **이미지 갤러리**
+    <br>
    ![2025-06-05_18-21-45_5](https://github.com/user-attachments/assets/0dbe44f9-e9f5-457f-acad-2951ebff93c2)
 ![2025-06-05_18-21-45_6](https://github.com/user-attachments/assets/b8af6da0-5c44-4e52-b681-b595805802b2)
 
@@ -186,7 +195,7 @@
  <br>
 
    **유튜브 최신영상 가져오기**
-
+    <br>
   ![bandicam 2025-06-25 12-50-55-924](https://github.com/user-attachments/assets/708ff4e1-f6dc-4a2f-9ea0-0ce35565a827)
 ![bandicam 2025-06-25 12-47-19-677](https://github.com/user-attachments/assets/578622be-c30c-469b-be75-8df24435a106)
 
@@ -196,6 +205,7 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
  <br>
  
 **어드민 페이지**
+ <br>
 ![bandicam 2025-05-30 19-11-03-897](https://github.com/user-attachments/assets/fab41c6c-3870-421e-be31-4bc9b10ef3a7)
 
   <p>
@@ -206,6 +216,7 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
 
 
 **Swagger API 문서화**
+ <br>
 ![image](https://github.com/user-attachments/assets/c7cee12f-8471-47f5-85dd-326728e93869)
 
 
@@ -234,6 +245,7 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
  <br>
  
 ### :bulb: ⚙ 프로젝트 설계 ERD
+ <br>
 ![bandicam 2025-06-25 14-43-47-074](https://github.com/user-attachments/assets/45dda539-4e7b-4e3c-a912-0a816c89c0b9)
 
  <br>
