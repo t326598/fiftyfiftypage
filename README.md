@@ -81,20 +81,12 @@
   </p>
   <p>
     1. Git Action을 활용해 healthz http 메소드에 요청을 10분마다 전달하도록 설정 -> Git action이 정상적으로 동작하지 않음
+  </p>
+  <p>
     2. 외부 페이지인 UpdateRobot 페이지를 활용해 10분마다 요청 전달 이후 서버 슬립 없이 동작 확인인
   </p>
 
 <br>
-
-![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
-![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
-
-
-<p>Spring에서 제공하는 @Scheduled 기능을 활용하여 매일 오전 9시 마다 Youtube API를 활용해 조회수 탑 10개 영상을 가져오도록 설계했으며 필터처리를 통해 특정 날짜 이후 특정 단어를 제외한 검색기록만 가져오도록 설계하여 잘못된 정보가 들어오지 않도록 구현하였습니다.</p>
-
-<p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
-
- <br>
 
 ![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
 ![bandicam 2025-05-31 01-24-56-994](https://github.com/user-attachments/assets/cbab4beb-0e5a-4b76-90a5-c5b143749cc2)
