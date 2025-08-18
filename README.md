@@ -197,7 +197,9 @@ YouTube API 를 활용하여 최신영상을 가져오도록 설정했습니다.
  
 ### :bulb: ⚙ 프로젝트 설계 ERD
  <br>
-![bandicam 2025-06-25 14-43-47-074](https://github.com/user-attachments/assets/45dda539-4e7b-4e3c-a912-0a816c89c0b9)
+
+<img width="1358" height="833" alt="image" src="https://github.com/user-attachments/assets/03dc3592-8442-48d3-b44f-9874539d886c" />
+
 
  <br>
  
