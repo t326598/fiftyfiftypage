@@ -33,6 +33,7 @@
   <p>
     로고, 배경 아이콘을 모두 테마별 리소스로 분리
   </p>
+  
   ### :bulb: 애로사항
   <p>
     배포시 이미지 불러오는 과정에서 버벅거림 발생 
@@ -50,7 +51,6 @@
  **카테고리 별 일정 캘린더**
   <br>
 ![2025-06-05_18-21-45_2](https://github.com/user-attachments/assets/9e1d4958-d4b6-45a6-9156-4d9a4c39e0ec)
-![bandicam 2025-05-31 01-12-50-787](https://github.com/user-attachments/assets/ac35d3c0-71d4-4038-8398-f81d8a4260d4)
   <p>
 음방, 컴백 등 crt 필드를 가진 이벤트 컬렉션 FullCalendar.js 사용 및 카테고리 별 색상 표시
 
@@ -93,48 +93,7 @@
 <p>Spring에서 제공하는 @Scheduled 기능을 활용하여 매일 오전 9시 마다 Youtube API를 활용해 조회수 탑 10개 영상을 가져오도록 설계했으며 필터처리를 통해 특정 날짜 이후 특정 단어를 제외한 검색기록만 가져오도록 설계하여 잘못된 정보가 들어오지 않도록 구현하였습니다.</p>
 
 <p>ThreadPoolTaskScheduler를 사용하여 스케줄러 스레드가 정해진 개수막 동작하도록 설정했으며 @Transactional을 활용하여 잘못된 정보가 저장되지 않도록 설계</p>
- <br>
 
- **Today 체크 및 시각화**
-  <br>
-![bandicam 2025-06-25 12-39-45-676](https://github.com/user-attachments/assets/897758f6-cb76-4351-83e7-3b79ea5f7529)
- <p>
-  페이지 접속시 today를 체크해 카운팅 진행 후 23:59까지 유효한 쿠키를 생성해 신규/재방문 유입을 체크해 Chart.js를 통해 시각화를 진행했습니다.
-   해당 기능을 통해 어떤 날 유입이 가장 많은지 파악하며 상황에 유동적으로 대처할수 있습니다.
- </p>
-
-   ### :bulb: 애로사항
-  <p>
-    배포 이후 기존 back-end에서 진행하던 투데이 쿠키 저장이 동작하지 않는 현상 발생
-  </p>
-  <p>
-   기존 back-end에서 저장하던 쿠키를 front-end에서 바로 저장하고 전달해 확인하는 방식으로 변경
-  </p>
-
- **DB 데이터 자동 삭제**
-  <br>
-![bandicam 2025-06-10 16-41-38-923](https://github.com/user-attachments/assets/c3c66b36-d21d-4827-b1ba-4e5d72315060)
-![bandicam 2025-06-10 16-41-51-029](https://github.com/user-attachments/assets/4e437ecd-2718-4e02-9462-1841d31e8d38)
-  <p>
-    DB에 이미지를 체크하여 DB에는 있지만 경로에 이미지가 없는 경우 DB를 자동으로 삭제하도록 구현하여 불필요한 용량이 차지하지 않도록 설계하였습니다.
-  </p>
- <br>
-   
-   **이미지 갤러리**
-    <br>
-![2025-06-05_18-21-45_5](https://github.com/user-attachments/assets/0dbe44f9-e9f5-457f-acad-2951ebff93c2)
-![2025-06-05_18-21-45_6](https://github.com/user-attachments/assets/b8af6da0-5c44-4e52-b681-b595805802b2)
-
-  <p>
-    backend 에서 페이징 처리를 진행하여 접속시 과도한 리소스 방지
-  </p>
-
-   ### :bulb: 애로사항
-  <p>
-    페이징 및 필터 이동시 마다 끊기는 현상 발생
-  </p>
-  <p>
-    페이지 접속 시 모든 데이터를 가져오고 Front-end에서 페이징 및 필터 처리를 진행해 유저 사용성 높임  </p>
  <br>
 
 ![bandicam 2025-05-31 01-24-48-185](https://github.com/user-attachments/assets/e5666ea9-da88-41b4-bcf9-7bceb1e4cd6b)
